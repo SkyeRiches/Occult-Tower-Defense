@@ -43,9 +43,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (doFire)
         {
-            GameObject projectile = Instantiate(bullet, firePoint.position, Quaternion.identity);
+	        GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack("Bullet", lookDir.normalized * 5.0f, firePoint.position, this.gameObject.transform, 5.0f);
 
-            StartCoroutine(FireCooldown());
+	        StartCoroutine(FireCooldown());
         }
     }
     
