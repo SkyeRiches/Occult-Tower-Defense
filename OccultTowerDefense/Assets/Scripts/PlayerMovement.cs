@@ -12,13 +12,19 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerControls controls;
 
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform firePoint;
+    private bool doFire = false;
+
     private void Awake()
     {
         controls = new PlayerControls();
         controls.Gameplay.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => movement = Vector2.zero;
         controls.Gameplay.Aim.performed += ctx => lookDir = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Aim.started += ctx => { doFire = true; Fire(); };
         controls.Gameplay.Aim.canceled += ctx => lookDir = Vector2.zero;
+        controls.Gameplay.Aim.canceled += ctx => doFire = false;
     }
 
     // Update is called once per frame
@@ -29,9 +35,24 @@ public class PlayerMovement : MonoBehaviour
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
             angle -= 90; //basically a magic number lol
 
-            transform.rotation = Quaternion.Euler(0,0,angle);
-            
+            transform.rotation = Quaternion.Euler(0,0,angle);            
         }
+    }
+
+    void Fire()
+    {
+        if (doFire)
+        {
+            GameObject projectile = Instantiate(bullet, firePoint.position, Quaternion.identity);
+
+            StartCoroutine(FireCooldown());
+        }
+    }
+    
+    private IEnumerator FireCooldown()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Fire();
     }
 
     private void FixedUpdate()
