@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6925324031752535323}
   - component: {fileID: 6925324031752535322}
   - component: {fileID: 6925324031752535325}
+  - component: {fileID: 7504032190725870851}
+  - component: {fileID: 6780660275365718919}
   m_Layer: 0
   m_Name: EnemyPrefab
   m_TagString: Enemy
@@ -126,3 +128,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &7504032190725870851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6925324031752535321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f10f272ef728344687d3771557625c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creatureAllignment: 0
+--- !u!114 &6780660275365718919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6925324031752535321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 495593a76a9e5624d81e440c7a5b13ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
