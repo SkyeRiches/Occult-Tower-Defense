@@ -14,7 +14,7 @@ public class Currency : MonoBehaviour
 
     public void IncreaseSouls(float amount)
     {
-        fNumSouls++;
+        fNumSouls += amount;
         Debug.Log(fNumSouls);
         // Update GUI
     }
