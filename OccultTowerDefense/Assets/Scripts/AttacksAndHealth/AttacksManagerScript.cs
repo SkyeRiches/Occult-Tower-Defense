@@ -22,7 +22,10 @@ public class AttacksManagerScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-
+		if (Input.GetMouseButton(0))
+		{
+			Debug.Log("pog");
+		}
 	}
 
 	private Attacks GetAttackOfName(string name)

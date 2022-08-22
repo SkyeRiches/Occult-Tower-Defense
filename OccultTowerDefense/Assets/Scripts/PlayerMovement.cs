@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerControls controls;
 
-    [SerializeField] private GameObject bullet;
     [SerializeField] private Transform firePoint;
     private bool doFire = false;
 
