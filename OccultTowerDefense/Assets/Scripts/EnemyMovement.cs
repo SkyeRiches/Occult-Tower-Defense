@@ -52,11 +52,12 @@ public class EnemyMovement : MonoBehaviour
                 obstaclesInRange.Add(entity.gameObject);
             }
             else if (entity.gameObject.tag == "waypoint") {
-                if ((entity.transform.position - transform.position).magnitude < transform.localScale.magnitude)
-                if (entity.transform.position == (Vector3)destinationArray[locationInArray]) {
-                    locationInArray++;
-                    if (locationInArray <= destinationArray.Length) {
-                        nextDestination = destinationArray[locationInArray];
+                if ((entity.transform.position - transform.position).magnitude < transform.localScale.magnitude) {
+                    if (entity.transform.position == (Vector3)destinationArray[locationInArray]) {
+                        locationInArray++;
+                        if (locationInArray <= destinationArray.Length) {
+                            nextDestination = destinationArray[locationInArray];
+                        }
                     }
                 }
             }
