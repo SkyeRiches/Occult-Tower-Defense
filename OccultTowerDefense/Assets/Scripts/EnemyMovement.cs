@@ -52,7 +52,8 @@ public class EnemyMovement : MonoBehaviour
         }
 
 
-        enemyVelocity = (enemyVelocity + CalculateCohesionForce(enemiesInRange) * enemyCohesion) ;
+        enemyVelocity = (enemyVelocity + CalculateCohesionForce(enemiesInRange) * enemyCohesion);
+        enemyVelocity = (enemyVelocity - CalculateRepulsionForce(enemiesInRange) * enemyCohesion * 2);
         enemyVelocity = (enemyVelocity + CalculateWallRepulsionForce() * wallRepulsion) ;
         enemyVelocity = (enemyVelocity + ((nextDestination - (Vector2)transform.position).normalized) * nextDestinationAttraction);
 
@@ -67,6 +68,20 @@ public class EnemyMovement : MonoBehaviour
         foreach (GameObject enemy in enemiesWithinRange) {
             Vector3 targetDirection = (enemy.transform.position - transform.position);
             if (targetDirection.magnitude > 0.0f) {
+                targetDirection = targetDirection.normalized;
+            }
+            velocity = velocity + targetDirection;
+
+        }
+        return velocity;
+
+    }
+
+    Vector2 CalculateRepulsionForce(List<GameObject> enemiesWithinRange) {
+        Vector3 velocity = new Vector3(0f, 0f, 0f);
+        foreach (GameObject enemy in enemiesWithinRange) {
+            Vector3 targetDirection = (enemy.transform.position - transform.position);
+            if (targetDirection.magnitude > 0.0f && targetDirection.magnitude < collisionAvoidNeighbourhood) {
                 targetDirection = targetDirection.normalized;
             }
             velocity = velocity + targetDirection;
