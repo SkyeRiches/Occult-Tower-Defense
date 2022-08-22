@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Managers
+  - Enemy
+  - Obstacle
+  - waypoint
   layers:
   - Default
   - TransparentFX
@@ -41,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: EnemyLayer
+    uniqueID: 4271584791
+    locked: 0
+  - name: WallLayer
+    uniqueID: 1874146925
     locked: 0

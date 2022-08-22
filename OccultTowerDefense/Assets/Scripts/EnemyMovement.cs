@@ -6,6 +6,8 @@ public class EnemyMovement : MonoBehaviour
 {
     public Vector2[] destinationArray;
 
+    private int locationInArray;
+
     public Vector2 enemyVelocity;
 
     public float neighbourhoodSize;
@@ -28,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        locationInArray = 0;
         destinationArray = RouteManager.destinationsForEnemies;
         nextDestination = destinationArray[0];
         playerInRange = false;
@@ -48,12 +51,21 @@ public class EnemyMovement : MonoBehaviour
             else if (entity.gameObject.tag == "Obstacle") {
                 obstaclesInRange.Add(entity.gameObject);
             }
+            else if (entity.gameObject.tag == "waypoint") {
+                if ((entity.transform.position - transform.position).magnitude < transform.localScale.magnitude)
+                if (entity.transform.position == (Vector3)destinationArray[locationInArray]) {
+                    locationInArray++;
+                    if (locationInArray <= destinationArray.Length) {
+                        nextDestination = destinationArray[locationInArray];
+                    }
+                }
+            }
             
         }
 
 
         enemyVelocity = (enemyVelocity + CalculateCohesionForce(enemiesInRange) * enemyCohesion);
-        enemyVelocity = (enemyVelocity - CalculateRepulsionForce(enemiesInRange) * enemyCohesion * 2);
+        enemyVelocity = (enemyVelocity - CalculateFleeForce(enemiesInRange) * enemyCohesion * 2);
         enemyVelocity = (enemyVelocity + CalculateWallRepulsionForce() * wallRepulsion) ;
         enemyVelocity = (enemyVelocity + ((nextDestination - (Vector2)transform.position).normalized) * nextDestinationAttraction);
 
@@ -77,7 +89,7 @@ public class EnemyMovement : MonoBehaviour
 
     }
 
-    Vector2 CalculateRepulsionForce(List<GameObject> enemiesWithinRange) {
+    Vector2 CalculateFleeForce(List<GameObject> enemiesWithinRange) {
         Vector3 velocity = new Vector3(0f, 0f, 0f);
         foreach (GameObject enemy in enemiesWithinRange) {
             Vector3 targetDirection = (enemy.transform.position - transform.position);
