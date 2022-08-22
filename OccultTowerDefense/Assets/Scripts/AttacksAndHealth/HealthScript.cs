@@ -95,6 +95,7 @@ public class HealthScript : MonoBehaviour {
 public enum EntityAllignment {
 	NEUTRAL = 0,
 	PLAYER = 1,
-	ENEMY = 2
+	ENEMY = 2,
+	Tower = 3,
 }
 #endregion

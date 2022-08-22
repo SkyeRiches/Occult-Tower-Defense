@@ -9,10 +9,15 @@ public class EntityStatManagerScript : MonoBehaviour {
 	#endregion
 
 	#region Private Variables.
+	//Entity script references.
+	private HealthScript healthScript = null;
 
-	private static List<Modifier> globalModifiers = null;
+	//Modifier utility variables.
+	private static List<Modifier> globalApplyModifiers = null;
+	private static List<Modifier> globalStorageModifier = null;
 	private static Queue<Modifier> globalRemovalList = null;
-	private List<Modifier> currentModifiers = null;
+	private List<Modifier> applyModifiers = null;
+	private List<Modifier> storageModifier = null;
 	private Queue<Modifier> removalList = null;
 	private int lastModifierCount = 0;
 	private int lastGlobalCount = 0;
@@ -21,114 +26,203 @@ public class EntityStatManagerScript : MonoBehaviour {
 	#region Private Functions.
 	// Start is called before the first frame update
 	void Start() {
-		lastModifierCount = currentModifiers.Count;
-		lastGlobalCount = globalModifiers.Count;
+		//Set up modifier utility variables.
+		globalRemovalList = new Queue<Modifier>();
+		globalApplyModifiers = new List<Modifier>();
+		globalStorageModifier = new List<Modifier>();
+		applyModifiers = new List<Modifier>();
+		storageModifier = new List<Modifier>();
+		removalList = new Queue<Modifier>();
+		lastModifierCount = applyModifiers.Count;
+		lastGlobalCount = globalApplyModifiers.Count;
+
+		//Get entity script references.
+		healthScript = this.gameObject.GetComponent<HealthScript>();
 	}
 
 	// Update is called once per frame
 	void Update() {
-		if (currentModifiers != null) {
-			if (currentModifiers.Count != lastModifierCount) {
-				UpdateModifiers();
+		if (applyModifiers != null) {
+			if (applyModifiers.Count != lastModifierCount) {
+				ApplyModifiers();
 			}
 		}
 
-		if (globalModifiers != null) {
-			if (globalModifiers.Count != lastGlobalCount) {
-				UpdateGlobalModifiers();
+		if (globalApplyModifiers != null) {
+			if (globalApplyModifiers.Count != lastGlobalCount) {
+				ApplyGlobalModifiers();
 			}
 		}
 
-		if (removalList != null)
-		{
-			if (removalList.Count > 0)
-			{
+		if (removalList != null) {
+			if (removalList.Count > 0) {
 				HandleRemovals();
 			}
 		}
 
-		if (globalRemovalList != null)
-		{
-			if (globalRemovalList.Count > 0)
-			{
+		if (globalRemovalList != null) {
+			if (globalRemovalList.Count > 0) {
 				HandleGlobalRemovals();
 			}
 		}
 	}
 
-	private void UpdateModifiers() {
+	/// <summary>
+	/// Actually applies the modifier to the scripts.
+	/// </summary>
+	private void ApplyModifier(Modifier a_modifier) {
+		switch (a_modifier.type) {
+			case ModifierType.none: {
+					break;
+				}
 
+			case ModifierType.attackDamageMultiplier: {
+					break;
+				}
+
+			case ModifierType.healthMultiplier: {
+					if (healthScript != null) {
+						healthScript.ApplyHealthMultiplier(a_modifier.value);
+					}
+					break;
+				}
+
+			default: {
+					break;
+				}
+		}
 	}
 
-	private void UpdateGlobalModifiers() {
+	/// <summary>
+	/// Handles Lists.
+	/// </summary>
+	private void ApplyModifiers() {
+		for (int i = 0; i < applyModifiers.Count; i++) {
+			if (applyModifiers[i] == null) {
+				continue;
+			}
 
+			ApplyModifier(applyModifiers[i]);
+			storageModifier.Add(applyModifiers[i]);
+			applyModifiers.Remove(applyModifiers[i]);
+		}
 	}
 
-	private void HandleRemovals()
-	{
+	private void ApplyGlobalModifiers() {
+		for (int i = 0; i < globalApplyModifiers.Count; i++) {
+			if (globalApplyModifiers[i] == null) {
+				continue;
+			}
 
+			ApplyModifier(globalApplyModifiers[i]);
+			globalStorageModifier.Add(globalApplyModifiers[i]);
+			globalApplyModifiers.Remove(globalApplyModifiers[i]);
+		}
 	}
 
-	private void HandleGlobalRemovals()
-	{
+	private void UnApplyModifier(Modifier a_modifier) {
+		switch (a_modifier.type) {
+			case ModifierType.none: {
+					break;
+				}
 
+			case ModifierType.attackDamageMultiplier: {
+					break;
+				}
+
+			case ModifierType.healthMultiplier: {
+					if (healthScript != null) {
+						healthScript.ApplyHealthMultiplier(1 / a_modifier.value);
+					}
+					break;
+				}
+
+			default: {
+					break;
+				}
+		}
+	}
+
+	private void HandleRemovals() {
+		for (int i = 0; i < removalList.Count; i++)
+		{
+			Modifier removalModifier = removalList.Dequeue();
+			if (removalModifier == null)
+			{
+				continue;
+			}
+
+			UnApplyModifier(removalModifier);
+			
+		}
+	}
+
+	private void HandleGlobalRemovals() {
+		for (int i = 0; i < globalRemovalList.Count; i++) {
+			Modifier removalModifier = globalRemovalList.Dequeue();
+			if (removalModifier == null) {
+				continue;
+			}
+
+			UnApplyModifier(removalModifier);
+		}
 	}
 	#endregion
 
 	#region Public Access Functions (Getters and Setters).
 
 	public void AddModifier(Modifier a_modifier) {
-		if (currentModifiers == null) {
-			currentModifiers = new List<Modifier>();
+		if (applyModifiers == null) {
+			applyModifiers = new List<Modifier>();
 		}
-		currentModifiers.Add(a_modifier);
+		applyModifiers.Add(a_modifier);
 	}
 
 	public void RemoveModifier(Modifier a_modifier) {
 		if (removalList == null) {
 			removalList = new Queue<Modifier>();
 		}
-		if (currentModifiers == null) {
-			currentModifiers = new List<Modifier>();
+		if (storageModifier == null) {
+			storageModifier = new List<Modifier>();
 		}
-		for (int i = 0; i < currentModifiers.Count; i++) {
-			Modifier modifier = currentModifiers[i];
+		for (int i = 0; i < storageModifier.Count; i++) {
+			Modifier modifier = storageModifier[i];
 			if (modifier == null) {
-				currentModifiers.Remove(currentModifiers[i]);
+				storageModifier.Remove(storageModifier[i]);
 				continue;
 			}
 
 			if (modifier.ID == a_modifier.ID) {
-				removalList.Enqueue(currentModifiers[i]);
-				currentModifiers.Remove(currentModifiers[i]);
+				removalList.Enqueue(storageModifier[i]);
+				storageModifier.Remove(storageModifier[i]);
 			}
 		}
 	}
 
 	public static void AddGlobal(Modifier a_modifier) {
-		if (globalModifiers == null) {
-			globalModifiers = new List<Modifier>();
+		if (globalApplyModifiers == null) {
+			globalApplyModifiers = new List<Modifier>();
 		}
-		globalModifiers.Add(a_modifier);
+		globalApplyModifiers.Add(a_modifier);
 	}
 
 	public static void RemoveGlobalModifier(Modifier a_modifier) {
 		if (globalRemovalList == null) {
 			globalRemovalList = new Queue<Modifier>();
 		}
-		if (globalModifiers == null) {
-			globalModifiers = new List<Modifier>();
+		if (globalStorageModifier == null) {
+			globalStorageModifier = new List<Modifier>();
 		}
-		for (int i = 0; i < globalModifiers.Count; i++) {
-			Modifier modifier = globalModifiers[i];
+		for (int i = 0; i < globalStorageModifier.Count; i++) {
+			Modifier modifier = globalStorageModifier[i];
 			if (modifier == null) {
-				globalModifiers.Remove(globalModifiers[i]);
+				globalStorageModifier.Remove(globalStorageModifier[i]);
 				continue;
 			}
 
 			if (modifier.ID == a_modifier.ID) {
-				globalRemovalList.Enqueue(globalModifiers[i]);
-				globalModifiers.Remove(globalModifiers[i]);
+				globalRemovalList.Enqueue(globalStorageModifier[i]);
+				globalStorageModifier.Remove(globalStorageModifier[i]);
 			}
 		}
 	}

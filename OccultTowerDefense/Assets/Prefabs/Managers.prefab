@@ -44,7 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ef59f71fbcbfd4e81d61d292ffee4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPrefabs: []
+  attackPrefabs:
+  - prefab: {fileID: 756080149559157464, guid: f751146a0ec86bb44963faefb82bd9dd, type: 3}
+    name: Bullet
+  - prefab: {fileID: 7421527665717128906, guid: 7867aaef6574bd84895bbce7101999fb, type: 3}
+    name: HealthMultiplier
 --- !u!114 &8220038626590265768
 MonoBehaviour:
   m_ObjectHideFlags: 0

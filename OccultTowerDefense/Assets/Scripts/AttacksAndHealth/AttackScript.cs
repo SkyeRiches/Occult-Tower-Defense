@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Modifiers;
 
 public class AttackScript : MonoBehaviour {
 	#region Variables to assign via the unity inspector (SerialiseFields).
@@ -11,6 +12,9 @@ public class AttackScript : MonoBehaviour {
 	[SerializeField]
 	[Range(1, 100)]
 	private int maxEntities = 5;
+
+	[SerializeField]
+	private List<Modifier> attackModifiers;
 	#endregion
 
 	#region Private Variables.
@@ -21,8 +25,9 @@ public class AttackScript : MonoBehaviour {
 
 	#region Private Functions.
 	// Start is called before the first frame update
-	void Start() {
-
+	void Start()
+	{
+		ownerHealth = new HealthScript();
 	}
 
 	// Update is called once per frame
@@ -40,16 +45,37 @@ public class AttackScript : MonoBehaviour {
 			return;
 		}
 
+		if (otherHealthScript.GetAllignment() == EntityAllignment.Tower)
+		{
+			return;
+		}
+
 		if (ownerHealth.GetAllignment() != otherHealthScript.GetAllignment() || ownerHealth.GetAllignment() == EntityAllignment.NEUTRAL) {
 			otherHealthScript.DamageEntity(attackDamage);
 		}
 
+		EntityStatManagerScript otherStatManager = other.transform.GetComponent<EntityStatManagerScript>();
+		for (int i = 0; i < attackModifiers.Count; i++) {
+			ApplyModifier(otherStatManager, attackModifiers[i]);
+		}
+
 		maxEntities--;
-		if (maxEntities <= 0)
-		{
+		if (maxEntities <= 0) {
 			this.gameObject.SetActive(false);
 		}
 
+	}
+
+	private void ApplyModifier(EntityStatManagerScript statManager, Modifier a_modifier) {
+		if (statManager == null) {
+			return;
+		}
+
+		if (a_modifier == null) {
+			return;
+		}
+
+		statManager.AddModifier(new Modifier(a_modifier));
 	}
 	#endregion
 
