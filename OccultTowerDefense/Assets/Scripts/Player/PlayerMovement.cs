@@ -34,7 +34,17 @@ public class PlayerMovement : MonoBehaviour
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
             angle -= 90; //basically a magic number lol
 
-            transform.rotation = Quaternion.Euler(0,0,angle);            
+            transform.rotation = Quaternion.Euler(0,0,angle);
+
+            if (lookDir.magnitude < 0.25f)
+            {
+                doFire = false;
+            }
+            else if (!doFire)
+            {
+                doFire = true;
+                Fire();
+            }
         }
     }
 

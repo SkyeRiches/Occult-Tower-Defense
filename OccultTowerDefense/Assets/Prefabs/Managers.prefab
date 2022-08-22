@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7032891452271129587}
   - component: {fileID: 7032891452271129586}
+  - component: {fileID: 8220038626590265768}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Managers
@@ -43,6 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ef59f71fbcbfd4e81d61d292ffee4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPrefabs:
-  - prefab: {fileID: 756080149559157464, guid: f751146a0ec86bb44963faefb82bd9dd, type: 3}
-    name: Bullet
+  attackPrefabs: []
+--- !u!114 &8220038626590265768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7032891452271129584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d93e6c58c52da4893fda303a388ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingSouls: 0
