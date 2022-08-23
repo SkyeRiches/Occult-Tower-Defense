@@ -9,6 +9,8 @@ TagManager:
   - Obstacle
   - waypoint
   - Soul
+  - Tower
+  - God
   layers:
   - Default
   - TransparentFX
