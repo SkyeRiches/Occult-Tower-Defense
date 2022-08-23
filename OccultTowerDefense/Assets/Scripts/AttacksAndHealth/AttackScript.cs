@@ -36,6 +36,11 @@ public class AttackScript : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
+		if (other.transform == null)
+		{
+			return;
+		}
+		
 		if (other.transform == attackOwner) {
 			return;
 		}
