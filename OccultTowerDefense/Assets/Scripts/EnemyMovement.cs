@@ -34,6 +34,7 @@ public class EnemyMovement : MonoBehaviour
         destinationArray = RouteManager.destinationsForEnemies;
         nextDestination = destinationArray[0];
         playerInRange = false;
+        wallRepulsion = 10000000;
     }
 
 
@@ -67,12 +68,14 @@ public class EnemyMovement : MonoBehaviour
 
         enemyVelocity = (enemyVelocity + CalculateCohesionForce(enemiesInRange) * enemyCohesion);
         enemyVelocity = (enemyVelocity - CalculateFleeForce(enemiesInRange) * enemyCohesion * 2);
-        enemyVelocity = (enemyVelocity + CalculateWallRepulsionForce() * wallRepulsion) ;
+        // enemyVelocity = (enemyVelocity + CalculateWallRepulsionForce() * wallRepulsion) ;
         enemyVelocity = (enemyVelocity + ((nextDestination - (Vector2)transform.position).normalized) * nextDestinationAttraction);
 
-        transform.position = transform.position + ((Vector3)enemyVelocity * speed * 0.01f);
+        enemyVelocity = AdjustForWalls(enemyVelocity);
 
+        transform.position = transform.position + ((Vector3)enemyVelocity.normalized * speed * 0.01f);
 
+        
 
     }
 
@@ -90,15 +93,72 @@ public class EnemyMovement : MonoBehaviour
 
     }
 
+    Vector3 AdjustForWalls(Vector3 CurrentVelocity) {
+        // dummy float, -1 if something below, 1 if something above, 0 otherwise
+        bool up = false;
+        bool down = false;
+        bool left = false;
+        bool right = false;
+
+        RaycastHit2D[] upTest = Physics2D.RaycastAll(transform.position, new Vector2(0, 1), collisionAvoidNeighbourhood);
+        RaycastHit2D[] downTest = Physics2D.RaycastAll(transform.position, new Vector2(0, -1), collisionAvoidNeighbourhood);
+        RaycastHit2D[] leftTest = Physics2D.RaycastAll(transform.position, new Vector2(-1, 0), collisionAvoidNeighbourhood);
+        RaycastHit2D[] rightTest = Physics2D.RaycastAll(transform.position, new Vector2(1, 0), collisionAvoidNeighbourhood);
+
+        foreach (RaycastHit2D hit in upTest) {
+            if (hit.transform.gameObject.tag == "Obstacle") {
+                up = true;
+            }
+        }
+        foreach (RaycastHit2D hit in downTest) {
+            if (hit.transform.gameObject.tag == "Obstacle") {
+                down = true;
+            }
+        }
+        foreach (RaycastHit2D hit in leftTest) {
+            if (hit.transform.gameObject.tag == "Obstacle") {
+                left = true;
+            }
+        }
+        foreach (RaycastHit2D hit in rightTest) {
+            if (hit.transform.gameObject.tag == "Obstacle") {
+                right = true;
+            }
+        }
+
+        if (up) {
+            if (CurrentVelocity.y > 0) {
+                CurrentVelocity.y = 0;
+            }
+        }
+        if (down) {
+            if (CurrentVelocity.y < 0) {
+                CurrentVelocity.y = 0;
+            }
+        }
+        if (left) {
+            if (CurrentVelocity.x < 0) {
+                CurrentVelocity.x = 0;
+            }
+        }
+        if (right) {
+            if (CurrentVelocity.x > 0) {
+                CurrentVelocity.x = 0;
+            }
+        }
+
+        return CurrentVelocity;
+    }
+
     Vector2 CalculateFleeForce(List<GameObject> enemiesWithinRange) {
         Vector3 velocity = new Vector3(0f, 0f, 0f);
         foreach (GameObject enemy in enemiesWithinRange) {
             Vector3 targetDirection = (enemy.transform.position - transform.position);
             if (targetDirection.magnitude > 0.0f && targetDirection.magnitude < collisionAvoidNeighbourhood) {
                 targetDirection = targetDirection.normalized;
-            }
-            velocity = velocity + targetDirection;
 
+                velocity = velocity + targetDirection;
+            }
         }
         return velocity;
 
