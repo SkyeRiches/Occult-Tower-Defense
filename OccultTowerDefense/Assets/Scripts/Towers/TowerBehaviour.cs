@@ -18,4 +18,9 @@ public class TowerBehaviour : MonoBehaviour
     {
         state = TOWER_STATE.PLACED;
     }
+
+    public void EmpowerTower()
+    {
+        // increase the tower stats 
+    }
 }

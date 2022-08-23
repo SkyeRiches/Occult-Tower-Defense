@@ -10,6 +10,7 @@ public class DragNDrop : MonoBehaviour
     private bool hasTowerInst;
     private bool canPlace;
     private bool placedTower;
+    private bool empowerTower;
     private TowerManager towerManager;
     private SpriteRenderer towerSprite;
 
@@ -36,7 +37,15 @@ public class DragNDrop : MonoBehaviour
         {
             hasTowerInst = false;
             placedTower = true;
+
             towerManager.towers.Add(objectToDrag);
+            objectToDrag.GetComponent<TowerBehaviour>().PlaceTower();
+
+            if (empowerTower)
+            {
+                objectToDrag.GetComponent<TowerBehaviour>().EmpowerTower();
+            }
+
             objectToDrag = null;
             towerSprite = null;
         }
@@ -53,6 +62,7 @@ public class DragNDrop : MonoBehaviour
 
     private void CheckPos()
     {
+        // Check if the tower is too close to another tower
         if (towerManager.towers.Count > 0)
         {
             foreach (GameObject go in towerManager.towers)
@@ -60,7 +70,7 @@ public class DragNDrop : MonoBehaviour
                 if (objectToDrag != null)
                 {
                     float distance = Vector2.Distance(objectToDrag.transform.position, go.transform.position);
-                    if (distance < objectToDrag.GetComponent<TowerBehaviour>().placementRadius)
+                    if (distance < go.GetComponent<TowerBehaviour>().placementRadius)
                     {
                         canPlace = false;
                         break;
@@ -76,6 +86,31 @@ public class DragNDrop : MonoBehaviour
         {
             canPlace = true;
         }
+
+        // Check if the tower is being placed on a pool of power
+        if (towerManager.powerPools.Count > 0)
+        {
+            foreach (GameObject go in towerManager.powerPools)
+            {
+                if (objectToDrag != null)
+                {
+                    float distance = Vector2.Distance(objectToDrag.transform.position, go.transform.position);
+                    if (distance < go.GetComponent<PowerPool>().placementRadius)
+                    {
+                        empowerTower = true;
+                        break;
+                    }
+                    else
+                    {
+                        empowerTower = false;
+                    }
+                }
+            }
+        }
+        else
+        {
+            empowerTower = false;
+        }
     }
 
     void ChangeTowerColor()
@@ -89,6 +124,11 @@ public class DragNDrop : MonoBehaviour
             else if (!canPlace)
             {
                 towerSprite.color = Color.red;
+            }
+            
+            if (empowerTower)
+            {
+                towerSprite.color = Color.magenta;
             }
         }
     }
