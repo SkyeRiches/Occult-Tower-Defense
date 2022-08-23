@@ -15,25 +15,18 @@ public class AttacksManagerScript : MonoBehaviour {
 
 	#region Private Functions.
 	// Start is called before the first frame update
-	void Start()
-	{
+	void Start() {
 		attacks = new List<Transform>();
 	}
 
 	// Update is called once per frame
 	void Update() {
-		if (Input.GetMouseButton(0))
-		{
-			Debug.Log("pog");
-		}
+
 	}
 
-	private Attacks GetAttackOfName(string name)
-	{
-		for (int i = 0; i < attackPrefabs.Count; i++)
-		{
-			if (attackPrefabs[i].name == name)
-			{
+	private Attacks GetAttackOfName(string name) {
+		for (int i = 0; i < attackPrefabs.Count; i++) {
+			if (attackPrefabs[i].name == name) {
 				return attackPrefabs[i];
 			}
 		}
@@ -45,8 +38,7 @@ public class AttacksManagerScript : MonoBehaviour {
 		return notValid;
 	}
 
-	private IEnumerator AttackCooldown(float time, Transform objectToDestroy)
-	{
+	private IEnumerator AttackCooldown(float time, Transform objectToDestroy) {
 		yield return new WaitForSecondsRealtime(time);
 		Destroy(objectToDestroy.gameObject);
 	}
@@ -55,21 +47,18 @@ public class AttacksManagerScript : MonoBehaviour {
 	#region Public Access Functions (Getters and Setters).
 
 	public void SpawnAttack(string attackName, Vector2 v2Velocity, Vector3 firePoint, Transform owner, float attackCooldownTime) {
-		if (owner == null)
-		{
+		if (owner == null) {
 			Debug.LogError("Owner of attack is null in SpawnAttack() function of 'AttackManagerScript.cs'");
 			return;
 		}
 
 		Attacks attack = GetAttackOfName(attackName);
-		if (attack.prefab == null)
-		{
+		if (attack.prefab == null) {
 			Debug.LogError("Attack attempted to be spawned does not exist in AttackManagerScript.cs");
 			return;
 		}
 
-		if (attack.prefab.GetComponent<Rigidbody2D>() == null)
-		{
+		if (attack.prefab.GetComponent<Rigidbody2D>() == null) {
 			Debug.LogError("ERROR: RigidBody2D not attached to prefab = " + attack.prefab.name);
 			return;
 		}

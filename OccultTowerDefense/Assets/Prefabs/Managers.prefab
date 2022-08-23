@@ -49,6 +49,8 @@ MonoBehaviour:
     name: Bullet
   - prefab: {fileID: 7421527665717128906, guid: 7867aaef6574bd84895bbce7101999fb, type: 3}
     name: HealthMultiplier
+  - prefab: {fileID: 8877035440416558626, guid: 0dada99ad831f584dbed2534d2bcfdf3, type: 3}
+    name: HealBullet
 --- !u!114 &8220038626590265768
 MonoBehaviour:
   m_ObjectHideFlags: 0

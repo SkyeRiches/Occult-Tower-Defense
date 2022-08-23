@@ -10,8 +10,11 @@ public class AttackScript : MonoBehaviour {
 	private float attackDamage = 10.0f;
 
 	[SerializeField]
-	[Range(1, 100)]
+
 	private int maxEntities = 5;
+
+	[SerializeField]
+	private bool isHeal = false;
 
 	[SerializeField]
 	private List<Modifier> attackModifiers;
@@ -25,8 +28,7 @@ public class AttackScript : MonoBehaviour {
 
 	#region Private Functions.
 	// Start is called before the first frame update
-	void Start()
-	{
+	void Start() {
 		ownerHealth = new HealthScript();
 	}
 
@@ -35,12 +37,17 @@ public class AttackScript : MonoBehaviour {
 
 	}
 
+	private void OnValidate() {
+		if (maxEntities <= 0) {
+			maxEntities = 1;
+		}
+	}
+
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (other.transform == null)
-		{
+		if (other.transform == null) {
 			return;
 		}
-		
+
 		if (other.transform == attackOwner) {
 			return;
 		}
@@ -50,13 +57,15 @@ public class AttackScript : MonoBehaviour {
 			return;
 		}
 
-		if (otherHealthScript.GetAllignment() == EntityAllignment.Tower)
-		{
+		if (otherHealthScript.GetAllignment() == EntityAllignment.Tower) {
 			return;
 		}
 
-		if (ownerHealth.GetAllignment() != otherHealthScript.GetAllignment() || ownerHealth.GetAllignment() == EntityAllignment.NEUTRAL) {
+		if ((ownerHealth.GetAllignment() != otherHealthScript.GetAllignment() || ownerHealth.GetAllignment() == EntityAllignment.NEUTRAL) && !isHeal) {
 			otherHealthScript.DamageEntity(attackDamage);
+		} else if ((ownerHealth.GetAllignment() == otherHealthScript.GetAllignment() || ownerHealth.GetAllignment() == EntityAllignment.NEUTRAL) && isHeal) {
+			otherHealthScript.HealEntity(attackDamage);
+			Debug.Log("HEALED CREATURE: " + other.gameObject.name);
 		}
 
 		EntityStatManagerScript otherStatManager = other.transform.GetComponent<EntityStatManagerScript>();
