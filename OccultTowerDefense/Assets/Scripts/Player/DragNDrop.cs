@@ -67,7 +67,7 @@ public class DragNDrop : MonoBehaviour
         {
             foreach (GameObject go in towerManager.towers)
             {
-                if (objectToDrag != null)
+                if (objectToDrag != null && go != null)
                 {
                     float distance = Vector2.Distance(objectToDrag.transform.position, go.transform.position);
                     if (distance < go.GetComponent<TowerBehaviour>().placementRadius)
@@ -92,7 +92,7 @@ public class DragNDrop : MonoBehaviour
         {
             foreach (GameObject go in towerManager.powerPools)
             {
-                if (objectToDrag != null)
+                if (objectToDrag != null && go != null)
                 {
                     float distance = Vector2.Distance(objectToDrag.transform.position, go.transform.position);
                     if (distance < go.GetComponent<PowerPool>().placementRadius)
@@ -126,7 +126,7 @@ public class DragNDrop : MonoBehaviour
                 towerSprite.color = Color.red;
             }
             
-            if (empowerTower)
+            if (empowerTower && canPlace)
             {
                 towerSprite.color = Color.magenta;
             }
