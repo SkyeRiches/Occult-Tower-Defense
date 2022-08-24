@@ -28,8 +28,6 @@ public class Soul : MonoBehaviour
     private void Update()
     {
         distance = Vector2.Distance(player.transform.position, transform.position);
-
-        Debug.Log(distance);
         
         if (distance <= attractDistance)
         {

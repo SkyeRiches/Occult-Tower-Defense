@@ -33,6 +33,9 @@ public class TowerBehaviour : MonoBehaviour {
 
 	[SerializeField]
 	private float cooldownTime = 1.0f;
+
+	[SerializeField]
+	private float cost = 50f;
 	#endregion
 
 	#region Private Variables.
@@ -47,12 +50,16 @@ public class TowerBehaviour : MonoBehaviour {
 
 	//Targeting list.
 	private List<GameObject> targets = new List<GameObject>();
+
+	private GameObject manager;
+
 	#endregion
 
 	#region Private Functions.
 
-	private void Start() {
-
+	private void Start() 
+	{
+		manager = GameObject.FindGameObjectWithTag("Managers");
 	}
 
 	private void Update() {
@@ -170,6 +177,8 @@ public class TowerBehaviour : MonoBehaviour {
 		} else {
 			targetTag = "Enemy";
 		}
+
+		manager.GetComponent<Currency>().DecreaseSouls(cost);
 	}
 
 	public void EmpowerTower() {
@@ -191,5 +200,10 @@ public class TowerBehaviour : MonoBehaviour {
 	public float GetPlacementRadius() {
 		return placementRadius;
 	}
+
+	public float GetCost()
+    {
+		return cost;
+    }
 	#endregion
 }

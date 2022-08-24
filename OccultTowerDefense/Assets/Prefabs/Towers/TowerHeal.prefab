@@ -49,6 +49,7 @@ MonoBehaviour:
   attackSpeed: 5
   attackRange: 10
   cooldownTime: 1
+  cost: 75
 --- !u!1 &7210106734340042684
 GameObject:
   m_ObjectHideFlags: 0

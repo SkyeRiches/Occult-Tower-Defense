@@ -458,7 +458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7877797026168131562, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
       propertyPath: towers.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7877797026168131562, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
       propertyPath: powerPools.Array.size
@@ -468,6 +468,10 @@ PrefabInstance:
       propertyPath: powerPools.Array.data[0]
       value: 
       objectReference: {fileID: 7337806469264806298, guid: c8a09edc57218b744bec24acd862c2d4, type: 3}
+    - target: {fileID: 8220038626590265768, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
+      propertyPath: startingSouls
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
 --- !u!1 &1785952261
