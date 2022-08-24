@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79d452b12b208b4b84769d3f81877b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
-  type: 1
+  type: 2
   placementRadius: 1.5
+  attackSpeed: 5
+  attackRange: 10
+  cooldownTime: 1
 --- !u!1 &7210106734340042684
 GameObject:
   m_ObjectHideFlags: 0

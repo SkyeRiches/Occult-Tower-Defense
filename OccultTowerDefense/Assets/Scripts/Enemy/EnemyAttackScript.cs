@@ -52,6 +52,7 @@ public class EnemyAttackScript : MonoBehaviour {
 	}
 
 	private void OnValidate() {
+		//Make sure all variables passed in via the inspector are correct.
 		if (attackSpeed <= 0.0f) {
 			attackSpeed = 0.1f;
 		}

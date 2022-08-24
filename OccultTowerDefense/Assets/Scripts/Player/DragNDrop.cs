@@ -2,141 +2,112 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragNDrop : MonoBehaviour
-{
-    public GameObject towerPrefab;
-    private GameObject objectToDrag;
+public class DragNDrop : MonoBehaviour {
+	public GameObject towerPrefab;
+	private GameObject objectToDrag;
 
-    private bool hasTowerInst;
-    private bool canPlace;
-    private bool placedTower;
-    private bool empowerTower;
-    private TowerManager towerManager;
-    private SpriteRenderer towerSprite;
+	private bool hasTowerInst;
+	private bool canPlace;
+	private bool placedTower;
+	private bool empowerTower;
+	private TowerManager towerManager;
+	private SpriteRenderer towerSprite;
 
-    private void Start()
-    {
-        towerManager = GameObject.FindGameObjectWithTag("Managers").GetComponent<TowerManager>();
-    }
+	private void Start() {
+		towerManager = GameObject.FindGameObjectWithTag("Managers").GetComponent<TowerManager>();
+	}
 
-    private void OnMouseDrag()
-    {
-        if (!hasTowerInst)
-        {
-            objectToDrag = Instantiate(towerPrefab, GetMousePos(), Quaternion.identity);
-            towerSprite = objectToDrag.GetComponentInChildren<SpriteRenderer>();
-            hasTowerInst = true;
-            placedTower = false;
-        }
-        objectToDrag.transform.position = GetMousePos(); 
-    }
+	private void OnMouseDrag() {
+		if (!hasTowerInst) {
+			objectToDrag = Instantiate(towerPrefab, GetMousePos(), Quaternion.identity);
+			towerSprite = objectToDrag.GetComponentInChildren<SpriteRenderer>();
+			hasTowerInst = true;
+			placedTower = false;
+		}
+		objectToDrag.transform.position = GetMousePos();
+	}
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Mouse0) && canPlace && !placedTower)
-        {
-            hasTowerInst = false;
-            placedTower = true;
+	private void Update() {
+		if (Input.GetKeyUp(KeyCode.Mouse0) && canPlace && !placedTower) {
+			hasTowerInst = false;
+			placedTower = true;
 
-            towerManager.towers.Add(objectToDrag);
-            objectToDrag.GetComponent<TowerBehaviour>().PlaceTower();
+			towerManager.towers.Add(objectToDrag);
+			if (objectToDrag != null) {
+				objectToDrag.GetComponent<TowerBehaviour>().PlaceTower();
 
-            if (empowerTower)
-            {
-                objectToDrag.GetComponent<TowerBehaviour>().EmpowerTower();
-            }
 
-            objectToDrag = null;
-            towerSprite = null;
-        }
+				if (empowerTower) {
+					objectToDrag.GetComponent<TowerBehaviour>().EmpowerTower();
+				}
+			}
 
-        if (Input.GetKey(KeyCode.Mouse0) && objectToDrag && !placedTower)
-        {
-            objectToDrag.transform.position = GetMousePos();
-        }
+			objectToDrag = null;
+			towerSprite = null;
+		}
 
-        CheckPos();
+		if (Input.GetKey(KeyCode.Mouse0) && objectToDrag && !placedTower) {
+			objectToDrag.transform.position = GetMousePos();
+		}
 
-        ChangeTowerColor();
-    }
+		CheckPos();
 
-    private void CheckPos()
-    {
-        // Check if the tower is too close to another tower
-        if (towerManager.towers.Count > 0)
-        {
-            foreach (GameObject go in towerManager.towers)
-            {
-                if (objectToDrag != null && go != null)
-                {
-                    float distance = Vector2.Distance(objectToDrag.transform.position, go.transform.position);
-                    if (distance < go.GetComponent<TowerBehaviour>().placementRadius)
-                    {
-                        canPlace = false;
-                        break;
-                    }
-                    else
-                    {
-                        canPlace = true;
-                    }
-                }
-            }
-        }
-        else
-        {
-            canPlace = true;
-        }
+		ChangeTowerColor();
+	}
 
-        // Check if the tower is being placed on a pool of power
-        if (towerManager.powerPools.Count > 0)
-        {
-            foreach (GameObject go in towerManager.powerPools)
-            {
-                if (objectToDrag != null && go != null)
-                {
-                    float distance = Vector2.Distance(objectToDrag.transform.position, go.transform.position);
-                    if (distance < go.GetComponent<PowerPool>().placementRadius)
-                    {
-                        empowerTower = true;
-                        break;
-                    }
-                    else
-                    {
-                        empowerTower = false;
-                    }
-                }
-            }
-        }
-        else
-        {
-            empowerTower = false;
-        }
-    }
+	private void CheckPos() {
+		// Check if the tower is too close to another tower
+		if (towerManager.towers.Count > 0) {
+			foreach (GameObject go in towerManager.towers) {
+				if (objectToDrag != null && go != null) {
+					float distance = Vector2.Distance(objectToDrag.transform.position, go.transform.position);
+					if (distance < go.GetComponent<TowerBehaviour>().GetPlacementRadius()) {
+						canPlace = false;
+						break;
+					} else {
+						canPlace = true;
+					}
+				}
+			}
+		} else {
+			canPlace = true;
+		}
 
-    void ChangeTowerColor()
-    {
-        if (towerSprite != null)
-        {
-            if (canPlace)
-            {
-                towerSprite.color = Color.white;
-            }
-            else if (!canPlace)
-            {
-                towerSprite.color = Color.red;
-            }
-            
-            if (empowerTower && canPlace)
-            {
-                towerSprite.color = Color.magenta;
-            }
-        }
-    }
+		// Check if the tower is being placed on a pool of power
+		if (towerManager.powerPools.Count > 0) {
+			foreach (GameObject go in towerManager.powerPools) {
+				if (objectToDrag != null && go != null) {
+					float distance = Vector2.Distance(objectToDrag.transform.position, go.transform.position);
+					if (distance < go.GetComponent<PowerPool>().placementRadius) {
+						empowerTower = true;
+						break;
+					} else {
+						empowerTower = false;
+					}
+				}
+			}
+		} else {
+			empowerTower = false;
+		}
+	}
 
-    Vector3 GetMousePos()
-    {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        return mousePos;
-    }
+	void ChangeTowerColor() {
+		if (towerSprite != null) {
+			if (canPlace) {
+				towerSprite.color = Color.white;
+			} else if (!canPlace) {
+				towerSprite.color = Color.red;
+			}
+
+			if (empowerTower && canPlace) {
+				towerSprite.color = Color.magenta;
+			}
+		}
+	}
+
+	Vector3 GetMousePos() {
+		var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		mousePos.z = 0;
+		return mousePos;
+	}
 }

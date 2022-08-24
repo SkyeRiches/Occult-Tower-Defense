@@ -245,7 +245,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &150921684
 GameObject:
@@ -386,16 +386,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7032891452271129586, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
       propertyPath: attackPrefabs.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7032891452271129586, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
       propertyPath: attackPrefabs.Array.data[0].name
       value: Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 7032891452271129586, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
+      propertyPath: attackPrefabs.Array.data[1].name
+      value: HealBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032891452271129586, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
+      propertyPath: attackPrefabs.Array.data[2].name
+      value: HealthMultiplier
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032891452271129586, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
       propertyPath: attackPrefabs.Array.data[0].prefab
       value: 
       objectReference: {fileID: 756080149559157464, guid: f751146a0ec86bb44963faefb82bd9dd, type: 3}
+    - target: {fileID: 7032891452271129586, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
+      propertyPath: attackPrefabs.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 8877035440416558626, guid: 0dada99ad831f584dbed2534d2bcfdf3, type: 3}
+    - target: {fileID: 7032891452271129586, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
+      propertyPath: attackPrefabs.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 7421527665717128906, guid: 7867aaef6574bd84895bbce7101999fb, type: 3}
     - target: {fileID: 7032891452271129587, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -576,7 +592,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5217160399327446171
 PrefabInstance:
@@ -644,7 +660,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7337806469264806296, guid: c8a09edc57218b744bec24acd862c2d4, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7337806469264806296, guid: c8a09edc57218b744bec24acd862c2d4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -761,7 +777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9067416283735595318, guid: bcd9a5569e5bda34b868c490873d34bb, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcd9a5569e5bda34b868c490873d34bb, type: 3}
