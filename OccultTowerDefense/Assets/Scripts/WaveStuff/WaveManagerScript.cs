@@ -100,6 +100,15 @@ public class WaveManagerScript : MonoBehaviour {
 	{
 		return gameOver;
 	}
+
+	/// <summary>
+	/// Returns true if there's a wave in progress.
+	/// </summary>
+	/// <returns></returns>
+	public bool IsWaveInProgress()
+	{
+		return waveStarted;
+	}
 	#endregion
 
 	#region Validation
