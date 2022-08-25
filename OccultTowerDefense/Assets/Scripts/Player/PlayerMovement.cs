@@ -24,8 +24,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Movement.canceled += ctx => movement = Vector2.zero;
         controls.Gameplay.Aim.performed += ctx => lookDir = ctx.ReadValue<Vector2>();
         controls.Gameplay.Aim.started += ctx => { doFire = true; };
-        controls.Gameplay.Aim.canceled += ctx => lookDir = Vector2.zero;
-        controls.Gameplay.Aim.canceled += ctx => doFire = false;
+        controls.Gameplay.Aim.canceled += ctx => { doFire = false; StopCoroutine(FireCooldown()); lookDir = Vector2.zero; };
     }
 
     // Update is called once per frame
