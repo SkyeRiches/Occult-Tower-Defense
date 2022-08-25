@@ -65,7 +65,7 @@ public class AttackScript : MonoBehaviour {
 		if ((ownerHealth.GetAllignment() != otherHealthScript.GetAllignment() || ownerHealth.GetAllignment() == EntityAllignment.NEUTRAL) && !isHeal) {
 			bool didKill = otherHealthScript.DamageEntity(attackDamage * damageMultiplier);
 			if (didKill) {
-				if (ownerHealth.gameObject.tag == "Player" && otherHealthScript.gameObject.tag == "Enemy") {
+				if (attackOwner.gameObject.tag == "Player" && otherHealthScript.gameObject.tag == "Enemy") {
 					Progression progression = attackOwner.gameObject.GetComponent<Progression>();
 					progression.IncreaseKills(1);
 				}
