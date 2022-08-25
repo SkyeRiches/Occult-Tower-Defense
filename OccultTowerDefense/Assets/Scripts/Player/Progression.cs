@@ -20,5 +20,20 @@ public class Progression : MonoBehaviour
         iKillTracker = 0;
     }
 
+    private void Update()
+    {
+        if (iKillTracker == iLevelReq && iCurrentLevel < 11)
+        {
+            LevelUP();
+        }
+    }
 
+    private void LevelUP()
+    {
+        iCurrentLevel++;
+        // increase player hp by 10
+        // increase damage dealt by x0.2
+        gameObject.GetComponent<PlayerMovement>().ReduceFireCooldown(0.1f);
+        iLevelReq += 100;
+    }
 }

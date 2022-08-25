@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9067416283735595319}
   - component: {fileID: 9067416283735595314}
   - component: {fileID: 2669230254178758320}
+  - component: {fileID: 8492224185676541969}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -105,6 +106,7 @@ MonoBehaviour:
   fMoveSpeed: 3
   rb: {fileID: 9067416283735595319}
   firePoint: {fileID: 9067416285138676687}
+  fFireCooldown: 1
 --- !u!61 &9067416283735595318
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -196,6 +198,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxBaseHealth: 100
   creatureAllignment: 0
+--- !u!114 &8492224185676541969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9067416283735595316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3dcef589d6403f4985fc8e360e4ec3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9067416284260015473
 GameObject:
   m_ObjectHideFlags: 0

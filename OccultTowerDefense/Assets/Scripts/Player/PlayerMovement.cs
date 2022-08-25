@@ -13,10 +13,15 @@ public class PlayerMovement : MonoBehaviour
     PlayerControls controls;
 
     [SerializeField] private Transform firePoint;
-    private bool doFire = true;
 
-    private float fFireCooldown = 1f;
-    private bool canFire = true;
+    private bool doFire = true; // true when the fire cooldown has ended
+    [SerializeField] private float fFireCooldown = 1f;
+    private bool canFire = true; // true when the stick is being held beyond the deadzone
+
+    public void ReduceFireCooldown(float amount)
+    {
+        fFireCooldown -= amount;
+    }
 
     private void Awake()
     {
@@ -24,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => movement = Vector2.zero;
         controls.Gameplay.Aim.performed += ctx => lookDir = ctx.ReadValue<Vector2>();
-        //controls.Gameplay.Aim.started += ctx => { doFire = true; };
         controls.Gameplay.Aim.canceled += ctx => { canFire = false; lookDir = Vector2.zero; };
     }
 
