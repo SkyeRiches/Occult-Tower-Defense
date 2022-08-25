@@ -15,13 +15,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform firePoint;
     private bool doFire = false;
 
+    private float fFireCooldown = 1f;
+
     private void Awake()
     {
         controls = new PlayerControls();
         controls.Gameplay.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => movement = Vector2.zero;
         controls.Gameplay.Aim.performed += ctx => lookDir = ctx.ReadValue<Vector2>();
-        controls.Gameplay.Aim.started += ctx => { doFire = true; Fire(); };
+        controls.Gameplay.Aim.started += ctx => { doFire = true; };
         controls.Gameplay.Aim.canceled += ctx => lookDir = Vector2.zero;
         controls.Gameplay.Aim.canceled += ctx => doFire = false;
     }
@@ -52,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (doFire)
         {
-	        GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack("Bullet", lookDir.normalized * 5.0f, firePoint.position, this.gameObject.transform, 5.0f);
+	        GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack("Bullet", lookDir.normalized * 5.0f, firePoint.position, this.gameObject.transform, 0.5f);
 
 	        StartCoroutine(FireCooldown());
         }
@@ -60,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     
     private IEnumerator FireCooldown()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(fFireCooldown);
         Fire();
     }
 
