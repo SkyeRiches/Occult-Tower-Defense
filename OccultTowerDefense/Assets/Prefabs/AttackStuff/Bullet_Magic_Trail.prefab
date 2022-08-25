@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5967764960202114953}
   - component: {fileID: 5698015544090147746}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet_Magic_Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,7 +192,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cf7d4ecf83fe8e94ab07873ffed84da6, type: 2}
+  - {fileID: 2100000, guid: 8f5ede5a170ce8a4988fe587adadff77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
