@@ -71,8 +71,6 @@ public class DragNDrop : MonoBehaviour
 		CheckPos();
 
 		ChangeTowerColor();
-
-		Debug.Log("Can place tower = " + canPlace);
 	}
 
 	private bool CheckCost()

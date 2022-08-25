@@ -13,9 +13,10 @@ public class PlayerMovement : MonoBehaviour
     PlayerControls controls;
 
     [SerializeField] private Transform firePoint;
-    private bool doFire = false;
+    private bool doFire = true;
 
     private float fFireCooldown = 1f;
+    private bool canFire = true;
 
     private void Awake()
     {
@@ -23,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => movement = Vector2.zero;
         controls.Gameplay.Aim.performed += ctx => lookDir = ctx.ReadValue<Vector2>();
-        controls.Gameplay.Aim.started += ctx => { doFire = true; };
-        controls.Gameplay.Aim.canceled += ctx => { doFire = false; StopCoroutine(FireCooldown()); lookDir = Vector2.zero; };
+        //controls.Gameplay.Aim.started += ctx => { doFire = true; };
+        controls.Gameplay.Aim.canceled += ctx => { canFire = false; lookDir = Vector2.zero; };
     }
 
     // Update is called once per frame
@@ -39,11 +40,11 @@ public class PlayerMovement : MonoBehaviour
 
             if (lookDir.magnitude < 0.25f)
             {
-                doFire = false;
+                canFire = false;
             }
-            else if (!doFire)
+            else
             {
-                doFire = true;
+                canFire = true;
                 Fire();
             }
         }
@@ -51,10 +52,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Fire()
     {
-        if (doFire)
+        if (doFire && canFire)
         {
 	        GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack("Bullet", lookDir.normalized * 5.0f, firePoint.position, this.gameObject.transform, 0.5f);
-
+            doFire = false;
 	        StartCoroutine(FireCooldown());
         }
     }
@@ -62,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator FireCooldown()
     {
         yield return new WaitForSeconds(fFireCooldown);
-        Fire();
+        doFire = true;
     }
 
     private void FixedUpdate()
