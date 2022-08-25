@@ -15,7 +15,7 @@ public class HealthScript : MonoBehaviour {
 
 	#region Private Variables.
 	private float baseHealth = 0.0f;
-	private float currentHealth = 0.0f;
+	[SerializeField] private float currentHealth = 0.0f;
 	private float currentHealthMuliplier = 1.0f;
 	#endregion
 
@@ -115,6 +115,7 @@ public enum EntityAllignment {
 	NEUTRAL = 0,
 	PLAYER = 1,
 	ENEMY = 2,
-	Tower = 3,
+	TOWER = 3,
+	DEFENCE_POINT = 4,
 }
 #endregion

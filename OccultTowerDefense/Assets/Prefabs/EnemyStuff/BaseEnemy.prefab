@@ -156,6 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Bullet
   attackSpeed: 5
-  attackRange: 1
+  attackRange: 2
   cooldownTime: 1
   isHealer: 0

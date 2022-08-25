@@ -13,7 +13,15 @@ public class Soul : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject go in gos)
+        {
+            if (go.name == "Player")
+            {
+                player = go;
+                break;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

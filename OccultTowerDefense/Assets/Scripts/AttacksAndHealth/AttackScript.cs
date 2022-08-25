@@ -58,7 +58,7 @@ public class AttackScript : MonoBehaviour {
 			return;
 		}
 
-		if (otherHealthScript.GetAllignment() == EntityAllignment.Tower) {
+		if (otherHealthScript.GetAllignment() == EntityAllignment.TOWER) {
 			return;
 		}
 
