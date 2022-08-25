@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5967764960202114953}
   - component: {fileID: 5698015544090147746}
   m_Layer: 0
-  m_Name: Bullet_Fire_Trail
+  m_Name: Bullet_Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 6161132015611810058}
-  - {fileID: 6515037707433244954}
+  - {fileID: 524653375346077939}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: acbbf9792fe5d4a418abcf4c18d3ecd2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31d6bf34b1a23a2409a67182efce103a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -193,7 +193,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cf7d4ecf83fe8e94ab07873ffed84da6, type: 2}
+  - {fileID: 2100000, guid: 8f5ede5a170ce8a4988fe587adadff77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -280,13 +280,17 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!1001 &7260829241834433584
+--- !u!1001 &4174349255997941209
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 756080149559157464}
     m_Modifications:
+    - target: {fileID: 4512562993674707754, guid: 5d85320ceb045ba489395163fd0b2ac2, type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 31d6bf34b1a23a2409a67182efce103a, type: 3}
     - target: {fileID: 4515340208498677034, guid: 5d85320ceb045ba489395163fd0b2ac2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -337,8 +341,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d85320ceb045ba489395163fd0b2ac2, type: 3}
---- !u!4 &6515037707433244954 stripped
+--- !u!4 &524653375346077939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4515340208498677034, guid: 5d85320ceb045ba489395163fd0b2ac2, type: 3}
-  m_PrefabInstance: {fileID: 7260829241834433584}
+  m_PrefabInstance: {fileID: 4174349255997941209}
   m_PrefabAsset: {fileID: 0}
