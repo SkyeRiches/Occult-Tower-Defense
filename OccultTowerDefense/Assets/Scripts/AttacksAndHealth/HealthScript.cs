@@ -28,7 +28,13 @@ public class HealthScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		if (currentHealth <= 0.0f) {
+		if (currentHealth <= 0.0f) 
+		{
+			if (gameObject.tag == "Player")
+            {
+				GameObject.FindGameObjectWithTag("Managers").GetComponent<Respawn>().BeginRespawn();
+				return;
+            }
 			DestroyEntity();
 		}
 	}

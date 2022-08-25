@@ -825,6 +825,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6583147831718715738, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1924376744}
+    - target: {fileID: 6583147831718715738, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 1785952265}
     - target: {fileID: 7032891452271129584, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
       propertyPath: m_Name
       value: Managers
@@ -1165,6 +1173,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8541435bd3e6e244bd01b33d3903be5, type: 3}
+--- !u!1 &1924376744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9067416283735595316, guid: bcd9a5569e5bda34b868c490873d34bb, type: 3}
+  m_PrefabInstance: {fileID: 9067416283792524741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2039385605
 PrefabInstance:
   m_ObjectHideFlags: 0

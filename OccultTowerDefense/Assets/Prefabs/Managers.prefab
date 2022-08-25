@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8220038626590265768}
   - component: {fileID: 7877797026168131562}
   - component: {fileID: 2072044927}
+  - component: {fileID: 6583147831718715738}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Managers
@@ -128,3 +129,17 @@ MonoBehaviour:
   - possibleEnemies:
     - enemyCount: 10
       enemyPrefab: {fileID: 6925324031752535321, guid: b8541435bd3e6e244bd01b33d3903be5, type: 3}
+--- !u!114 &6583147831718715738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7032891452271129584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3110844b9b01d340853c3d324b3c791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  respawnPoint: {fileID: 0}
