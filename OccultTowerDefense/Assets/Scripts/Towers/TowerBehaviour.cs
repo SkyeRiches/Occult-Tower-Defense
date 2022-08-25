@@ -48,6 +48,8 @@ public class TowerBehaviour : MonoBehaviour {
 	private bool canFire = true;
 	private string targetTag = "Player";
 
+	private float damageMultiplier = 1.0f;
+
 	//Targeting list.
 	private List<GameObject> targets = new List<GameObject>();
 
@@ -57,8 +59,7 @@ public class TowerBehaviour : MonoBehaviour {
 
 	#region Private Functions.
 
-	private void Start() 
-	{
+	private void Start() {
 		manager = GameObject.FindGameObjectWithTag("Managers");
 	}
 
@@ -135,7 +136,7 @@ public class TowerBehaviour : MonoBehaviour {
 	}
 
 	private void Fire(Vector2 a_dir) {
-		GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack(attackType, a_dir.normalized * attackSpeed, this.gameObject.transform.position, this.gameObject.transform, 5.0f);
+		GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack(attackType, a_dir.normalized * attackSpeed, this.gameObject.transform.position, this.gameObject.transform, damageMultiplier, 5.0f);
 	}
 
 	private IEnumerator FireCooldown() {
@@ -201,9 +202,8 @@ public class TowerBehaviour : MonoBehaviour {
 		return placementRadius;
 	}
 
-	public float GetCost()
-    {
+	public float GetCost() {
 		return cost;
-    }
+	}
 	#endregion
 }

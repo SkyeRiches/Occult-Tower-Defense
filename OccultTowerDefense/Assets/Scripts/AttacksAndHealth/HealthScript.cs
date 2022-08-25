@@ -28,8 +28,7 @@ public class HealthScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		if (currentHealth <= 0.0f)
-		{
+		if (currentHealth <= 0.0f) {
 			DestroyEntity();
 		}
 	}
@@ -44,8 +43,7 @@ public class HealthScript : MonoBehaviour {
 		currentHealth = Mathf.Clamp(currentHealth, 0, maxBaseHealth * currentHealthMuliplier);
 	}
 
-	protected virtual void DestroyEntity()
-	{
+	protected virtual void DestroyEntity() {
 		Destroy(this.gameObject);
 	}
 	#endregion
@@ -58,16 +56,38 @@ public class HealthScript : MonoBehaviour {
 		UpdateBaseHealth();
 	}
 
-	public void HealEntityToMax()
-	{
+	public void HealEntityToMax() {
 		currentHealth = maxBaseHealth * currentHealthMuliplier;
 		UpdateBaseHealth();
 	}
-	
-	public void DamageEntity(float a_damage) {
+
+	/// <summary>
+	/// Increases the max base health by the value passed in.
+	/// </summary>
+	/// <param name="a_increase"></param>
+	public void IncreaseMaxHealth(float a_increase) {
+		maxBaseHealth += a_increase;
+		UpdateBaseHealth();
+		UpdateCurrentHealth();
+	}
+
+
+	/// <summary>
+	/// Damages the entity by the points passed in as a parameter.
+	/// </summary>
+	/// <param name="a_damage"></param>
+	/// <returns>Returns true if the entity was killed by the attack. Returns false if the entity was not killed.</returns>
+	public bool DamageEntity(float a_damage) {
 		currentHealth -= a_damage;
 		currentHealth = Mathf.Clamp(currentHealth, 0, maxBaseHealth * currentHealthMuliplier);
 		UpdateBaseHealth();
+		if (currentHealth <= 0.0f) {
+			return true;
+
+		}
+
+		//Only returns false if the entity isn't killed.
+		return false;
 	}
 
 	public void ApplyHealthMultiplier(float a_mult) {
@@ -84,8 +104,7 @@ public class HealthScript : MonoBehaviour {
 		UpdateCurrentHealth();
 	}
 
-	public EntityAllignment GetAllignment()
-	{
+	public EntityAllignment GetAllignment() {
 		return creatureAllignment;
 	}
 	#endregion

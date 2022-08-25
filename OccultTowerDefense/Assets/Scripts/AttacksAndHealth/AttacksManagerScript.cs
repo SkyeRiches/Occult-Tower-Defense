@@ -46,7 +46,7 @@ public class AttacksManagerScript : MonoBehaviour {
 
 	#region Public Access Functions (Getters and Setters).
 
-	public void SpawnAttack(string attackName, Vector2 v2Velocity, Vector3 firePoint, Transform owner, float attackCooldownTime) {
+	public void SpawnAttack(string attackName, Vector2 v2Velocity, Vector3 firePoint, Transform owner, float a_attackModifierValue, float attackCooldownTime) {
 		if (owner == null) {
 			Debug.LogError("Owner of attack is null in SpawnAttack() function of 'AttackManagerScript.cs'");
 			return;
@@ -71,6 +71,7 @@ public class AttacksManagerScript : MonoBehaviour {
 
 		//Set the owner of this attack to the transform.
 		attackObject.GetComponent<AttackScript>().SetOwner(owner);
+		attackObject.GetComponent<AttackScript>().SetDamageMultiplier(a_attackModifierValue);
 
 		//Start Destruction cooldown.
 		StartCoroutine(AttackCooldown(attackCooldownTime, attackObject));

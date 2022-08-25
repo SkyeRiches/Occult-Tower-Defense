@@ -28,6 +28,7 @@ public class EnemyAttackScript : MonoBehaviour {
 
 	private bool canFire = true;
 	private string targetTag = "Player";
+	private float damageMultiplier = 1.0f;
 
 	//Targeting list.
 	private List<GameObject> targets = new List<GameObject>();
@@ -115,7 +116,7 @@ public class EnemyAttackScript : MonoBehaviour {
 	}
 
 	private void Fire(Vector2 a_dir) {
-		GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack(attackName, a_dir.normalized * attackSpeed, this.gameObject.transform.position, this.gameObject.transform, 5.0f);
+		GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack(attackName, a_dir.normalized * attackSpeed, this.gameObject.transform.position, this.gameObject.transform, damageMultiplier, 5.0f);
 	}
 
 	private IEnumerator FireCooldown() {

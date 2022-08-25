@@ -24,6 +24,7 @@ public class AttackScript : MonoBehaviour {
 
 	private Transform attackOwner;
 	private HealthScript ownerHealth;
+	private float damageMultiplier = 1.0f;
 	#endregion
 
 	#region Private Functions.
@@ -62,9 +63,15 @@ public class AttackScript : MonoBehaviour {
 		}
 
 		if ((ownerHealth.GetAllignment() != otherHealthScript.GetAllignment() || ownerHealth.GetAllignment() == EntityAllignment.NEUTRAL) && !isHeal) {
-			otherHealthScript.DamageEntity(attackDamage);
+			bool didKill = otherHealthScript.DamageEntity(attackDamage * damageMultiplier);
+			if (didKill) {
+				if (ownerHealth.gameObject.tag == "Player" && otherHealthScript.gameObject.tag == "Enemy") {
+					Progression progression = attackOwner.gameObject.GetComponent<Progression>();
+					progression.IncreaseKills(1);
+				}
+			}
 		} else if ((ownerHealth.GetAllignment() == otherHealthScript.GetAllignment() || ownerHealth.GetAllignment() == EntityAllignment.NEUTRAL) && isHeal) {
-			otherHealthScript.HealEntity(attackDamage);
+			otherHealthScript.HealEntity(attackDamage * damageMultiplier);
 			Debug.Log("HEALED CREATURE: " + other.gameObject.name);
 		}
 
@@ -98,6 +105,11 @@ public class AttackScript : MonoBehaviour {
 	public void SetOwner(Transform a_owner) {
 		attackOwner = a_owner;
 		ownerHealth = attackOwner.GetComponent<HealthScript>();
+	}
+
+	public void SetDamageMultiplier(float a_multiplier)
+	{
+		damageMultiplier = a_multiplier;
 	}
 	#endregion
 }
