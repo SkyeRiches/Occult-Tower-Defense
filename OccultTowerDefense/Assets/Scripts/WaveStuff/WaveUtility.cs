@@ -10,6 +10,8 @@ namespace WaveUtility {
 		[SerializeField]
 		private List<WaveInfo> possibleEnemies = new List<WaveInfo>();
 
+		private bool waveOver = false;
+
 		//Private Functions.
 		private bool ValidateEnemy(WaveInfo enemyInfo) {
 			//Get the prefab.
@@ -58,6 +60,40 @@ namespace WaveUtility {
 		//Public Access Functions.
 		public Wave() {
 
+		}
+
+		/// <summary>
+		/// Gets the next enemy to spawn.
+		/// </summary>
+		public WaveInfo GetNextEnemey() {
+			int enemyIndex = Random.Range(0, possibleEnemies.Count);
+			WaveInfo enemy = possibleEnemies[enemyIndex];
+			if (enemy.enemyCount > 0) {
+				enemy.enemyCount--;
+				possibleEnemies[enemyIndex] = enemy;
+				return enemy;
+			} else {
+				int enemiesLeft = 0;
+				//Check that there are any valid enemies left.
+				foreach (WaveInfo info in possibleEnemies) {
+					if (info.enemyCount > 0) {
+						enemiesLeft += info.enemyCount;
+					}
+				}
+
+				if (enemiesLeft <= 0) {
+					waveOver = true;
+					return enemy;
+				} else {
+					waveOver = false;
+					return GetNextEnemey();
+				}
+			}
+
+		}
+
+		public bool IsWaveOver() {
+			return waveOver;
 		}
 
 		/// <summary>
