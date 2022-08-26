@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6488b211c986b5a4295ccef8ef08040e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
-  maxEntities: 1
+  attackDamage: 100
+  maxEntities: 10
   isHeal: 0
   attackModifiers: []
 --- !u!50 &5967764960202114953
