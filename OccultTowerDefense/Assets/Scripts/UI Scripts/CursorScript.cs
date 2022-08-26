@@ -18,7 +18,7 @@ public class CursorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cursorShadow.rectTransform.position = Input.mousePosition;
+        cursorShadow.rectTransform.position = Input.mousePosition + new Vector3(40.0f,-40.0f);
         
         if (Input.GetMouseButtonDown(0))
         {
