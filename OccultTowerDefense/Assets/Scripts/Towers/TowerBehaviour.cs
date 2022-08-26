@@ -205,5 +205,10 @@ public class TowerBehaviour : MonoBehaviour {
 	public float GetCost() {
 		return cost;
 	}
+
+	public float GetRange()
+    {
+		return attackRange;
+    }
 	#endregion
 }
