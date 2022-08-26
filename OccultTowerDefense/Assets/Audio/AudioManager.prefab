@@ -43,10 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77537efdd7c81b84cb4efff7db45691c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSourcePoolSize: 20
+  audioSourcePoolSize: 150
   audioSourcePrefab: {fileID: 3188448617707716146, guid: d773f782c66384f4e85313b785522204, type: 3}
   baseMusicFile:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: df53dbdda81d51042aa9e771a3c2fc3c, type: 3}
     volume: 1
   damagePlayerFiles: []
   playerKilledFiles: []
