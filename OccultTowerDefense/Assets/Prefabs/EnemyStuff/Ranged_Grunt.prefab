@@ -102,17 +102,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destinationArray: []
   enemyVelocity: {x: 0, y: 0}
-  neighbourhoodSize: 2
-  collisionAvoidNeighbourhood: 1
+  neighbourhoodSize: 1
+  collisionAvoidNeighbourhood: 0.25
   nextDestination: {x: 0, y: 0}
   enemiesInRange: []
   obstaclesInRange: []
   playerInRange: 0
-  enemyCohesion: 0.5
+  enemyCohesion: 0.2
   wallRepulsion: 1
   playerAttraction: 0
   nextDestinationAttraction: 0.5
-  speed: 1
+  speed: 0.5
 --- !u!58 &6925324031752535325
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxBaseHealth: 100
   creatureAllignment: 2
-  currentHealth: 0
 --- !u!114 &6780660275365718919
 MonoBehaviour:
   m_ObjectHideFlags: 0

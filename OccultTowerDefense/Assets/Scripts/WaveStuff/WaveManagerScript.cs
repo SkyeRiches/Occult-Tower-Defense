@@ -25,8 +25,6 @@ public class WaveManagerScript : MonoBehaviour {
 	private Wave currentWave = null;
 	private bool waveOver = false;
 	private bool spawnCooldown = false;
-
-	private bool gameOver = false;
 	#endregion
 
 	#region Private Functions.
@@ -37,6 +35,14 @@ public class WaveManagerScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
+		if (gameWaves != null) {
+			if (gameWaves.Count <= 0 && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0) {
+				//GAME IS WON, PUT GAME WON CODE HERE
+				Debug.Log("GAME WON!!!");
+				return;
+
+			}
+		}
 		if (waveStarted && currentWave != null) {
 			if (!spawnCooldown) {
 				SpawnEnemy(currentWave.GetNextEnemey());
@@ -81,7 +87,6 @@ public class WaveManagerScript : MonoBehaviour {
 		}
 
 		if (gameWaves.Count <= 0) {
-			gameOver = true;
 			return;
 		}
 
@@ -93,20 +98,10 @@ public class WaveManagerScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Returns true if there are no waves left.
-	/// </summary>
-	/// <returns></returns>
-	public bool IsGameOver()
-	{
-		return gameOver;
-	}
-
-	/// <summary>
 	/// Returns true if there's a wave in progress.
 	/// </summary>
 	/// <returns></returns>
-	public bool IsWaveInProgress()
-	{
+	public bool IsWaveInProgress() {
 		return waveStarted;
 	}
 	#endregion
