@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7307706395246704036}
   - component: {fileID: 7307706395246704037}
   - component: {fileID: 7307706395246704058}
+  - component: {fileID: 799117719924851513}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -115,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.6
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -661,7 +662,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 6.12
+    angle: 1.96
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
@@ -4807,3 +4808,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &799117719924851513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7307706395246704059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771a44d0001ce9d43bf5f87f5d890bd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserLength: 0.1
