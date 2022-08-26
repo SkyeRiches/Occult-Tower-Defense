@@ -14,7 +14,7 @@ public class Laser : MonoBehaviour
     void Start()
     {
         laserEffect = GetComponent<ParticleSystem>();
-        laserEffectMain = GetComponent<ParticleSystem.MainModule>();
+        laserEffectMain = laserEffect.main;
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class Laser : MonoBehaviour
     {
         laserEffect.Stop();
         // Set laser length
-	    laserEffect.startLifetime = laserLength;
+	    laserEffectMain.startLifetime = laserLength;
 	    laserEffect.Play();
     }
 }
