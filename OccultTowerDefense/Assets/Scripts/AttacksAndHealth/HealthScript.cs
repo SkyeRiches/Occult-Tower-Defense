@@ -14,6 +14,8 @@ public class HealthScript : MonoBehaviour {
 	private GameObject dustCloudEffectInstance = null;
 	[SerializeField] private GameObject bloodCloudEffect = null;
 	private GameObject bloodCloudEffectInstance = null;
+	[SerializeField] private GameObject bloodSplatterEffect = null;
+	private GameObject bloodSplatterEffectInstance = null;
 
 	[SerializeField]
 	private EntityAllignment creatureAllignment = EntityAllignment.NEUTRAL;
@@ -78,6 +80,9 @@ public class HealthScript : MonoBehaviour {
 		// Trigger blood cloud effect
 		bloodCloudEffectInstance = Instantiate(bloodCloudEffect, transform.position, quaternion.identity);
 		Destroy(bloodCloudEffectInstance, 2);
+		// Trigger blood splatter effect
+		bloodSplatterEffectInstance = Instantiate(bloodSplatterEffect, transform.position, quaternion.identity);
+		Destroy(bloodSplatterEffectInstance, 8);
 		Destroy(this.gameObject);
 	}
 	#endregion
