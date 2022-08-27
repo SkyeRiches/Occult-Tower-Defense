@@ -142,6 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBaseHealth: 100
+  dustCloudEffect: {fileID: 8313897021562977748, guid: 68a52e8ffe6bec341b3128210a2e4468, type: 3}
+  bloodCloudEffect: {fileID: 7032357599452562237, guid: d7612d86389082e43bcd3d2ed03b035f, type: 3}
   creatureAllignment: 2
 --- !u!114 &6780660275365718919
 MonoBehaviour:

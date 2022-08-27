@@ -9,6 +9,12 @@ public class HealthScript : MonoBehaviour {
 	[SerializeField]
 	private float maxBaseHealth = 100.0f;
 
+	// Effects
+	[SerializeField] private GameObject dustCloudEffect = null;
+	private GameObject dustCloudEffectInstance = null;
+	[SerializeField] private GameObject bloodCloudEffect = null;
+	private GameObject bloodCloudEffectInstance = null;
+
 	[SerializeField]
 	private EntityAllignment creatureAllignment = EntityAllignment.NEUTRAL;
 	#endregion
@@ -68,6 +74,9 @@ public class HealthScript : MonoBehaviour {
 	}
 
 	protected virtual void DestroyEntity() {
+		// Trigger blood cloud effect
+		bloodCloudEffectInstance = Instantiate(bloodCloudEffect, transform.position, quaternion.identity);
+		Destroy(bloodCloudEffectInstance, 2);
 		Destroy(this.gameObject);
 	}
 	#endregion
@@ -102,6 +111,9 @@ public class HealthScript : MonoBehaviour {
 	/// <param name="a_damage"></param>
 	/// <returns>Returns true if the entity was killed by the attack. Returns false if the entity was not killed.</returns>
 	public bool DamageEntity(float a_damage) {
+		// Trigger dust cloud effect
+		dustCloudEffectInstance = Instantiate(dustCloudEffect, transform.position, quaternion.identity);
+		Destroy(dustCloudEffectInstance, 2);
 		currentHealth -= a_damage;
 		currentHealth = Mathf.Clamp(currentHealth, 0, maxBaseHealth * currentHealthMuliplier);
 		UpdateBaseHealth();

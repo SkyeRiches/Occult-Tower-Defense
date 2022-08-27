@@ -220,9 +220,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet_Trail
       objectReference: {fileID: 0}
+    - target: {fileID: 2226319546684832019, guid: 80c48a0319f941c41a1ac2ed8238f0d5, type: 3}
+      propertyPath: m_Time
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3085480928667395532, guid: 80c48a0319f941c41a1ac2ed8238f0d5, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085480928667395532, guid: 80c48a0319f941c41a1ac2ed8238f0d5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085480928667395532, guid: 80c48a0319f941c41a1ac2ed8238f0d5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085480928667395532, guid: 80c48a0319f941c41a1ac2ed8238f0d5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3085480928667395532, guid: 80c48a0319f941c41a1ac2ed8238f0d5, type: 3}
       propertyPath: m_LocalPosition.x
