@@ -8,6 +8,7 @@ namespace Modifiers {
 		none = 0,
 		healthMultiplier = 1,
 		attackDamageMultiplier = 2,
+		damageOverTime = 3,
 	}
 
 	[System.Serializable]
@@ -17,7 +18,7 @@ namespace Modifiers {
 		public ModifierType type = ModifierType.none;
 		public float value = 0.0f;
 		public float modifierTime = 1.0f;
-		public bool useTimer = true;
+		private string tag = "DEFAULT";
 
 		//Private Variables.
 		private static int modifierCount = 0;
@@ -25,14 +26,14 @@ namespace Modifiers {
 		//Private Functions.
 
 		//Public Functions.
-		public Modifier(ModifierType a_type, float a_value, float a_modifierTime, bool a_useModifierTime)
+		public Modifier(ModifierType a_type, float a_value, float a_modifierTime, string a_tag)
 		{
 			ID = modifierCount;
 			modifierCount++;
 			type = a_type;
 			value = a_value;
 			modifierTime = a_modifierTime;
-			useTimer = a_useModifierTime;
+			tag = a_tag;
 		}
 
 		public Modifier(Modifier a_copy)
@@ -42,7 +43,7 @@ namespace Modifiers {
 			type = a_copy.type;
 			value = a_copy.value;
 			modifierTime = a_copy.modifierTime;
-			useTimer = a_copy.useTimer;
+			tag = a_copy.tag;
 		}
 	}
 }

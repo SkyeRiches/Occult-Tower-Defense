@@ -9,7 +9,6 @@ public class RangeCircle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float range = gameObject.GetComponent<TowerBehaviour>().GetRange() * 2;
-        rangeIndicator.transform.localScale = new Vector3(range, range, range);
+
     }
 }

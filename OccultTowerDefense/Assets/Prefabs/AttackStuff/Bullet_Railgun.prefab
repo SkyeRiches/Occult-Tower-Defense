@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 100
-  maxEntities: 10
+  maxEntities: 100
   isHeal: 0
   attackModifiers: []
 --- !u!50 &5967764960202114953

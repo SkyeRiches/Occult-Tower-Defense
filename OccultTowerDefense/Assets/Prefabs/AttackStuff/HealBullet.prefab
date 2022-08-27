@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6410545688660352994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.091418974, y: 0.091418974, z: 0.091418974}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 9105359845834772858}
   m_Father: {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 10
-  maxEntities: 1
+  maxEntities: 2147483647
   isHeal: 1
   attackModifiers: []
 --- !u!50 &2566612860993629043

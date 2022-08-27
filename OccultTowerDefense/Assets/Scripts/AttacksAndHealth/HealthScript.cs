@@ -24,6 +24,12 @@ public class HealthScript : MonoBehaviour {
 	void Start() {
 		baseHealth = maxBaseHealth;
 		currentHealth = baseHealth * currentHealthMuliplier;
+		if (gameObject.name == "Base") {
+			UIChangeInt change = GameObject.FindGameObjectsWithTag("BaseHealthText")[0].GetComponent<UIChangeInt>();
+			if (change != null) {
+				change.ChangeInt(Mathf.RoundToInt(currentHealth));
+			}
+		}
 	}
 
 	// Update is called once per frame
@@ -46,6 +52,14 @@ public class HealthScript : MonoBehaviour {
 	private void UpdateBaseHealth() {
 		baseHealth = currentHealth / currentHealthMuliplier;
 		baseHealth = Mathf.Clamp(baseHealth, 0, maxBaseHealth);
+		if (gameObject.name == "Base")
+		{
+			UIChangeInt change = GameObject.FindGameObjectsWithTag("BaseHealthText")[0].GetComponent<UIChangeInt>();
+			if (change != null)
+			{
+				change.ChangeInt(Mathf.RoundToInt(currentHealth));
+			}
+		}
 	}
 
 	private void UpdateCurrentHealth() {
