@@ -272,8 +272,10 @@ MonoBehaviour:
   drag: 0.2
   altPos: {x: 0, y: 0}
   offset: {x: 0, y: 0}
+  altRot: 0
   altSizeMult: 5
   changesSize: 1
+  changesRotation: 0
 --- !u!1 &123314937
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +436,7 @@ GameObject:
   - component: {fileID: 204520725}
   - component: {fileID: 204520727}
   - component: {fileID: 204520726}
+  - component: {fileID: 204520728}
   m_Layer: 5
   m_Name: Hand
   m_TagString: Untagged
@@ -498,6 +501,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204520724}
   m_CullTransparentMesh: 1
+--- !u!114 &204520728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204520724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dddb0cfe884b1184e927bc3033c3cead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spring: 2
+  drag: 0.16
+  altPos: {x: 0, y: 0}
+  offset: {x: 0, y: 0}
+  altRot: 0
+  altSizeMult: 0
+  changesSize: 0
+  changesRotation: 0
 --- !u!1 &352072655
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +532,8 @@ GameObject:
   - component: {fileID: 352072656}
   - component: {fileID: 352072658}
   - component: {fileID: 352072657}
+  - component: {fileID: 352072659}
+  - component: {fileID: 352072660}
   m_Layer: 5
   m_Name: Playing Card Test
   m_TagString: Untagged
@@ -573,6 +598,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352072655}
   m_CullTransparentMesh: 1
+--- !u!114 &352072659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352072655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dddb0cfe884b1184e927bc3033c3cead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spring: 0.25
+  drag: 0.06
+  altPos: {x: 0, y: 0}
+  offset: {x: 0, y: 10}
+  altRot: 180
+  altSizeMult: 0
+  changesSize: 0
+  changesRotation: 1
+--- !u!114 &352072660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352072655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2fe1b0747ca73458b81d4a7a4b0739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteBack: {fileID: 21300000, guid: 858d4deb73ac0f24db17264119f20040, type: 3}
+  spriteFront: {fileID: 21300000, guid: 46c200834f366104f92b57d1e49f31ce, type: 3}
 --- !u!1 &475610176
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,6 +722,7 @@ GameObject:
   - component: {fileID: 585751075}
   - component: {fileID: 585751077}
   - component: {fileID: 585751076}
+  - component: {fileID: 585751078}
   m_Layer: 5
   m_Name: Playing Card Test (3)
   m_TagString: Untagged
@@ -683,7 +743,7 @@ RectTransform:
   m_Children:
   - {fileID: 1753406431}
   m_Father: {fileID: 625918666}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.09}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -728,6 +788,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585751074}
   m_CullTransparentMesh: 1
+--- !u!114 &585751078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585751074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1753406434}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: React
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1753406434}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: SwitchRot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1753406434}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: React
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1753406434}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: SwitchRot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &600511630
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,8 +992,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 89787990}
-  - {fileID: 1370273902}
   - {fileID: 585751075}
+  - {fileID: 1370273902}
   - {fileID: 832590388}
   - {fileID: 204520725}
   - {fileID: 2087015893}
@@ -887,6 +1016,7 @@ GameObject:
   - component: {fileID: 832590388}
   - component: {fileID: 832590390}
   - component: {fileID: 832590389}
+  - component: {fileID: 832590391}
   m_Layer: 5
   m_Name: Playing Card Test (4)
   m_TagString: Untagged
@@ -952,6 +1082,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832590387}
   m_CullTransparentMesh: 1
+--- !u!114 &832590391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832590387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 841437950}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: React
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 841437950}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: SwitchRot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 841437950}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: React
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 841437950}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: SwitchRot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &841437946
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,6 +1162,8 @@ GameObject:
   - component: {fileID: 841437947}
   - component: {fileID: 841437949}
   - component: {fileID: 841437948}
+  - component: {fileID: 841437950}
+  - component: {fileID: 841437951}
   m_Layer: 5
   m_Name: Playing Card Test
   m_TagString: Untagged
@@ -1027,6 +1228,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841437946}
   m_CullTransparentMesh: 1
+--- !u!114 &841437950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841437946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dddb0cfe884b1184e927bc3033c3cead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spring: 0.25
+  drag: 0.06
+  altPos: {x: 0, y: 0}
+  offset: {x: 0, y: 10}
+  altRot: 180
+  altSizeMult: 0
+  changesSize: 0
+  changesRotation: 1
+--- !u!114 &841437951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841437946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2fe1b0747ca73458b81d4a7a4b0739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteBack: {fileID: 21300000, guid: 858d4deb73ac0f24db17264119f20040, type: 3}
+  spriteFront: {fileID: 21300000, guid: 46c200834f366104f92b57d1e49f31ce, type: 3}
 --- !u!1 &1370273901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,6 +1273,7 @@ GameObject:
   - component: {fileID: 1370273902}
   - component: {fileID: 1370273904}
   - component: {fileID: 1370273903}
+  - component: {fileID: 1370273905}
   m_Layer: 5
   m_Name: Playing Card Test (2)
   m_TagString: Untagged
@@ -1052,13 +1288,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1370273901}
-  m_LocalRotation: {x: 0, y: 0, z: -0.025304608, w: 0.9996798}
+  m_LocalRotation: {x: 0, y: 0, z: -0.025304606, w: 0.99967974}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 352072656}
   m_Father: {fileID: 625918666}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.9}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1103,6 +1339,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1370273901}
   m_CullTransparentMesh: 1
+--- !u!114 &1370273905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370273901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 352072659}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: React
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 352072659}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: SwitchRot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 352072659}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: React
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 352072659}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: SwitchRot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1753406430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,6 +1419,8 @@ GameObject:
   - component: {fileID: 1753406431}
   - component: {fileID: 1753406433}
   - component: {fileID: 1753406432}
+  - component: {fileID: 1753406434}
+  - component: {fileID: 1753406435}
   m_Layer: 5
   m_Name: Playing Card Test
   m_TagString: Untagged
@@ -1178,6 +1485,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753406430}
   m_CullTransparentMesh: 1
+--- !u!114 &1753406434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753406430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dddb0cfe884b1184e927bc3033c3cead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spring: 0.25
+  drag: 0.06
+  altPos: {x: 0, y: 0}
+  offset: {x: 0, y: 10}
+  altRot: 180
+  altSizeMult: 0
+  changesSize: 0
+  changesRotation: 1
+--- !u!114 &1753406435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753406430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2fe1b0747ca73458b81d4a7a4b0739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteBack: {fileID: 21300000, guid: 858d4deb73ac0f24db17264119f20040, type: 3}
+  spriteFront: {fileID: 21300000, guid: 46c200834f366104f92b57d1e49f31ce, type: 3}
 --- !u!1 &2087015892
 GameObject:
   m_ObjectHideFlags: 0
