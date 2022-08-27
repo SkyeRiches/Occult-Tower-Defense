@@ -8,6 +8,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject winMessage;
     [SerializeField] private GameObject failMessage;
 
+    private void Update()
+    {
+	    if (winMessage.active || failMessage.active)
+	    {
+		    if (Input.GetKeyDown(KeyCode.Space)) ;
+	    }
+    }
+
     public void FailGame()
     {
         winMessage.SetActive(true);

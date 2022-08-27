@@ -44,6 +44,7 @@ public class WaveManagerScript : MonoBehaviour {
 			if (gameWaves.Count <= 0 && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && waveOver) {
 				//GAME IS WON, PUT GAME WON CODE HERE
 				Debug.Log("GAME WON!!!");
+				gameObject.GetComponent<GameManager>().WinGame();
 				return;
 
 			}
