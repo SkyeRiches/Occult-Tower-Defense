@@ -41,6 +41,7 @@ public class HealthScript : MonoBehaviour {
 			} else if (gameObject.tag == "Player" && gameObject.name == "Base") {
 				//PUT GAME OVER STUFF HERE
 				Debug.Log("GAME OVER!!!");
+				GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<GameManager>().FailGame();
 				gameObject.SetActive(false);
 				return;
 			} else {
