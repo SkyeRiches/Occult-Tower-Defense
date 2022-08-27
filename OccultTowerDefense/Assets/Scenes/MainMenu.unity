@@ -521,7 +521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30.4}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -295.6, y: -303.7}
+  m_AnchoredPosition: {x: -295.6, y: -385.21}
   m_SizeDelta: {x: 258.9305, y: 380.3757}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &204520726
@@ -538,7 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dddb0cfe884b1184e927bc3033c3cead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spring: 2
+  spring: 0.5
   drag: 0.16
   altPos: {x: 0, y: 0}
   offset: {x: 0, y: 0}
@@ -692,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteBack: {fileID: 21300000, guid: 858d4deb73ac0f24db17264119f20040, type: 3}
-  spriteFront: {fileID: 21300000, guid: 46c200834f366104f92b57d1e49f31ce, type: 3}
+  spriteFront: {fileID: 21300000, guid: 6f0d4eb754010474da967a61f0e719e3, type: 3}
 --- !u!1 &475610176
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,6 +887,18 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 204520728}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: OverwriteTargetX
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: -295.6
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -1253,6 +1265,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 204520728}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: OverwriteTargetX
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 265
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -1391,7 +1415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteBack: {fileID: 21300000, guid: 858d4deb73ac0f24db17264119f20040, type: 3}
-  spriteFront: {fileID: 21300000, guid: 46c200834f366104f92b57d1e49f31ce, type: 3}
+  spriteFront: {fileID: 21300000, guid: 43729707c5a726f46a30ee793672fe2e, type: 3}
 --- !u!1 &1370273901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,6 +1531,18 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 204520728}
+          m_TargetAssemblyTypeName: SpringDynamics, Assembly-CSharp
+          m_MethodName: OverwriteTargetX
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: -40
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -1648,7 +1684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteBack: {fileID: 21300000, guid: 858d4deb73ac0f24db17264119f20040, type: 3}
-  spriteFront: {fileID: 21300000, guid: 46c200834f366104f92b57d1e49f31ce, type: 3}
+  spriteFront: {fileID: 21300000, guid: 9bf456209046877479392ea5dd7816d8, type: 3}
 --- !u!1 &2087015892
 GameObject:
   m_ObjectHideFlags: 0

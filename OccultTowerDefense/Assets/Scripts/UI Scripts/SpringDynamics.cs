@@ -118,6 +118,11 @@ public class SpringDynamics : MonoBehaviour
         altPos = temp;
     }
 
+    public void OverwriteTargetX(float x)
+    {
+        primaryTarget.x = x;
+    }
+
     /// <summary>
     /// Teleports the UI object to its alternate position for use of UI objects coming into view after a scene transition
     /// </summary>
