@@ -382,8 +382,10 @@ MonoBehaviour:
   drag: 0.16
   altPos: {x: 0, y: 0}
   offset: {x: 0, y: 0}
+  altRot: 0
   altSizeMult: 0
   changesSize: 0
+  changesRotation: 0
 --- !u!114 &41827810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1612,8 +1614,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.28, y: 5.87}
-    newSize: {x: 6.28, y: 5.87}
+    oldSize: {x: 7.41, y: 6.25}
+    newSize: {x: 7.41, y: 6.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -2740,8 +2742,10 @@ MonoBehaviour:
   drag: 0.16
   altPos: {x: 0, y: 0}
   offset: {x: 0, y: 0}
+  altRot: 0
   altSizeMult: 0
   changesSize: 0
+  changesRotation: 0
 --- !u!1001 &701183533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3479,8 +3483,10 @@ MonoBehaviour:
   drag: 0.16
   altPos: {x: 0, y: 0}
   offset: {x: 0, y: 0}
+  altRot: 0
   altSizeMult: 0
   changesSize: 0
+  changesRotation: 0
 --- !u!114 &866066711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3994,10 +4000,6 @@ PrefabInstance:
     - target: {fileID: 7032891452271129584, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
       propertyPath: m_Name
       value: Managers
-      objectReference: {fileID: 0}
-    - target: {fileID: 7032891452271129586, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
-      propertyPath: attackPrefabs.Array.data[2].name
-      value: RailgunBullet
       objectReference: {fileID: 0}
     - target: {fileID: 7032891452271129587, guid: 81f2812ded0d42c4dbba1e3c0ded4264, type: 3}
       propertyPath: m_RootOrder
@@ -7531,8 +7533,10 @@ MonoBehaviour:
   drag: 0.16
   altPos: {x: 0, y: 0}
   offset: {x: 0, y: 0}
+  altRot: 0
   altSizeMult: 0
   changesSize: 0
+  changesRotation: 0
 --- !u!1 &1938958617
 GameObject:
   m_ObjectHideFlags: 0
@@ -7858,8 +7862,10 @@ MonoBehaviour:
   drag: 0.16
   altPos: {x: 0, y: 0}
   offset: {x: 0, y: 0}
+  altRot: 0
   altSizeMult: 0
   changesSize: 0
+  changesRotation: 0
 --- !u!114 &1981357742
 MonoBehaviour:
   m_ObjectHideFlags: 0

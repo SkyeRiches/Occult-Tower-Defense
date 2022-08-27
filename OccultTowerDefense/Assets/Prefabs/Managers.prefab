@@ -85,7 +85,7 @@ MonoBehaviour:
   - prefab: {fileID: 756080149559157464, guid: 8a0af58badf83e64ca367a089fdeeb3a, type: 3}
     name: Bullet_Fire
   - prefab: {fileID: 756080149559157464, guid: 0cbb79527e226a44fadb590403bd07dc, type: 3}
-    name: Bullet_Railgun
+    name: RailgunBullet
   - prefab: {fileID: 8877035440416558626, guid: 0dada99ad831f584dbed2534d2bcfdf3, type: 3}
     name: HealBullet
   - prefab: {fileID: 7421527665717128906, guid: 7867aaef6574bd84895bbce7101999fb, type: 3}
