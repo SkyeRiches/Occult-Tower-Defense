@@ -15,7 +15,7 @@ public class HealthScript : MonoBehaviour {
 
 	#region Private Variables.
 	private float baseHealth = 0.0f;
-	[SerializeField] private float currentHealth = 0.0f;
+	private float currentHealth = 0.0f;
 	private float currentHealthMuliplier = 1.0f;
 	#endregion
 
@@ -24,24 +24,42 @@ public class HealthScript : MonoBehaviour {
 	void Start() {
 		baseHealth = maxBaseHealth;
 		currentHealth = baseHealth * currentHealthMuliplier;
+		if (gameObject.name == "Base") {
+			UIChangeInt change = GameObject.FindGameObjectsWithTag("BaseHealthText")[0].GetComponent<UIChangeInt>();
+			if (change != null) {
+				change.ChangeInt(Mathf.RoundToInt(currentHealth));
+			}
+		}
 	}
 
 	// Update is called once per frame
 	void Update() {
-		if (currentHealth <= 0.0f) 
-		{
-			if (gameObject.tag == "Player")
-            {
+		if (currentHealth <= 0.0f) {
+			if (gameObject.tag == "Player" && gameObject.name != "Base") {
 				GameObject.FindGameObjectWithTag("Managers").GetComponent<Respawn>().BeginRespawn();
 				return;
-            }
-			DestroyEntity();
+			} else if (gameObject.tag == "Player" && gameObject.name == "Base") {
+				//PUT GAME OVER STUFF HERE
+				Debug.Log("GAME OVER!!!");
+				gameObject.SetActive(false);
+				return;
+			} else {
+				DestroyEntity();
+			}
 		}
 	}
 
 	private void UpdateBaseHealth() {
 		baseHealth = currentHealth / currentHealthMuliplier;
 		baseHealth = Mathf.Clamp(baseHealth, 0, maxBaseHealth);
+		if (gameObject.name == "Base")
+		{
+			UIChangeInt change = GameObject.FindGameObjectsWithTag("BaseHealthText")[0].GetComponent<UIChangeInt>();
+			if (change != null)
+			{
+				change.ChangeInt(Mathf.RoundToInt(currentHealth));
+			}
+		}
 	}
 
 	private void UpdateCurrentHealth() {

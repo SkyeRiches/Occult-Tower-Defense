@@ -128,22 +128,22 @@ public class EnemyMovement : MonoBehaviour
 
         if (up) {
             if (CurrentVelocity.y > 0) {
-                CurrentVelocity.y = 0;
+                CurrentVelocity.y = 0.05f;
             }
         }
         if (down) {
             if (CurrentVelocity.y < 0) {
-                CurrentVelocity.y = 0;
+                CurrentVelocity.y = -0.05f;
             }
         }
         if (left) {
             if (CurrentVelocity.x < 0) {
-                CurrentVelocity.x = 0;
+                CurrentVelocity.x = -0.05f;
             }
         }
         if (right) {
             if (CurrentVelocity.x > 0) {
-                CurrentVelocity.x = 0;
+                CurrentVelocity.x = 0.05f;
             }
         }
 

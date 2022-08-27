@@ -11,6 +11,10 @@ TagManager:
   - Soul
   - Tower
   - God
+  - BaseHealthText
+  - WaveText
+  - SoulText
+  - LevelText
   layers:
   - Default
   - TransparentFX

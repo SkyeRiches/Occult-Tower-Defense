@@ -12,7 +12,9 @@ public class TowerBehaviour : MonoBehaviour {
 	public enum TOWER_TYPE {
 		BASIC,
 		FIRE,
-		HEAL
+		HEAL,
+		BURST,
+		RAILGUN,
 	}
 
 	#region Variables to assign via the unity inspector (SerializeFields).
@@ -36,6 +38,9 @@ public class TowerBehaviour : MonoBehaviour {
 
 	[SerializeField]
 	private float cost = 50f;
+
+	[SerializeField]
+	private GameObject rangeIndicator;
 	#endregion
 
 	#region Private Variables.
@@ -64,10 +69,32 @@ public class TowerBehaviour : MonoBehaviour {
 	}
 
 	private void Update() {
-
+		if (!isPlaced) {
+			float range = (attackRange * 2) * 1.0f;
+			rangeIndicator.transform.localScale = new Vector3(range, range, range);
+			Color rangeCol = Color.grey;
+			rangeCol.a = 0.25f;
+			rangeIndicator.GetComponent<SpriteRenderer>().color = rangeCol;
+		}
 		if (canFire && isPlaced) {
 			UpdateTargetsList();
-			AimAndFire();
+			if (type == TOWER_TYPE.HEAL) {
+				if (targets.Count > 0) {
+					Vector2 healpos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+					FireStationary(healpos);
+					canFire = false;
+					StartCoroutine(FireCooldown());
+				}
+			} else if (type == TOWER_TYPE.BURST) {
+				if (targets.Count > 0) {
+					Vector2 pos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+					FireStationary(pos);
+					canFire = false;
+					StartCoroutine(FireCooldown());
+				}
+			} else {
+				AimAndFire();
+			}
 		}
 	}
 
@@ -90,6 +117,11 @@ public class TowerBehaviour : MonoBehaviour {
 		if (cooldownTime <= 0.0f) {
 			cooldownTime = 0.01f;
 		}
+	}
+
+	private void OnDrawGizmos() {
+		Gizmos.color = Color.black;
+		Gizmos.DrawWireSphere(gameObject.transform.position, attackRange);
 	}
 
 	private void UpdateTargetsList() {
@@ -136,7 +168,11 @@ public class TowerBehaviour : MonoBehaviour {
 	}
 
 	private void Fire(Vector2 a_dir) {
-		GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack(attackType, a_dir.normalized * attackSpeed, this.gameObject.transform.position, this.gameObject.transform, damageMultiplier, 5.0f);
+		GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack(attackType, a_dir.normalized * attackSpeed, this.gameObject.transform.position, this.gameObject.transform, damageMultiplier, attackRange * 1.5f);
+	}
+
+	private void FireStationary(Vector2 a_pos) {
+		GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack(attackType, Vector2.zero, new Vector3(a_pos.x, a_pos.y, 0.0f), this.gameObject.transform, damageMultiplier, cooldownTime * 0.75f);
 	}
 
 	private IEnumerator FireCooldown() {
@@ -148,24 +184,37 @@ public class TowerBehaviour : MonoBehaviour {
 	#region Public Access Functions.
 	public void PlaceTower() {
 		isPlaced = true;
+		rangeIndicator.SetActive(false);
 
 		switch (type) {
 			case TOWER_TYPE.BASIC: {
 					isHealer = false;
-					attackType = "Bullet";
+					attackType = "TowerCrystal";
 					gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
 					break;
 				}
 			case TOWER_TYPE.FIRE: {
 					isHealer = false;
-					attackType = string.Empty;
-					gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.yellow, Color.red, 0.5f);
+					attackType = "FireBullet";
+					gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
 					break;
 				}
 			case TOWER_TYPE.HEAL: {
 					attackType = "HealBullet";
 					isHealer = true;
-					gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+					gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+					break;
+				}
+			case TOWER_TYPE.BURST: {
+					attackType = "BurstBullet";
+					isHealer = false;
+					gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+					break;
+				}
+			case TOWER_TYPE.RAILGUN: {
+					attackType = "RailgunBullet";
+					isHealer = false;
+					gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
 					break;
 				}
 			default: {
@@ -204,6 +253,10 @@ public class TowerBehaviour : MonoBehaviour {
 
 	public float GetCost() {
 		return cost;
+	}
+
+	public float GetRange() {
+		return attackRange;
 	}
 	#endregion
 }

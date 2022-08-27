@@ -103,7 +103,13 @@ MonoBehaviour:
   attackDamage: 10
   maxEntities: 1
   isHeal: 0
-  attackModifiers: []
+  attackModifiers:
+  - type: 3
+    value: 10
+    modifierTime: 2
+  - type: 1
+    value: 0.75
+    modifierTime: 2
 --- !u!50 &5967764960202114953
 Rigidbody2D:
   serializedVersion: 4

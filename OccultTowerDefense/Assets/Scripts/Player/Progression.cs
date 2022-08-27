@@ -18,6 +18,10 @@ public class Progression : MonoBehaviour
 	{
 		iCurrentLevel = 0;
 		iKillTracker = 0;
+		UIChangeInt change = GameObject.FindGameObjectsWithTag("LevelText")[0].GetComponent<UIChangeInt>();
+		if (change != null) {
+			change.ChangeInt(Mathf.RoundToInt(iCurrentLevel));
+		}
 	}
 
 	private void Update() 
@@ -31,6 +35,10 @@ public class Progression : MonoBehaviour
 	private void LevelUP() 
 	{
 		iCurrentLevel++;
+		UIChangeInt change = GameObject.FindGameObjectsWithTag("LevelText")[0].GetComponent<UIChangeInt>();
+		if (change != null) {
+			change.ChangeInt(Mathf.RoundToInt(iCurrentLevel));
+		}
 		// increase player hp by 10
 		HealthScript playerHealth = this.gameObject.GetComponent<HealthScript>();
 		if (playerHealth != null) 

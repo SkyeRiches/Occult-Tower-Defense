@@ -134,6 +134,7 @@ namespace WaveUtility {
 	[System.Serializable]
 	public struct WaveInfo {
 		public int enemyCount;
+		public float spawnRate;
 		public GameObject enemyPrefab;
 	}
 }

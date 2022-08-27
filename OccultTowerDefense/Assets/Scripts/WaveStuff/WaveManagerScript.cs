@@ -6,13 +6,11 @@ using WaveUtility;
 public class WaveManagerScript : MonoBehaviour {
 	#region Variables to assign via the unity inspector (SerializeFields).
 	[SerializeField]
+	[Range(1, 1000)]
+	private int soulsPerRound = 50;
+
+	[SerializeField]
 	private Transform spawnPoint = null;
-
-	[SerializeField]
-	private float spawnRateLowerRange = 0.1f;
-
-	[SerializeField]
-	private float spawnRateUpperRange = 1.0f;
 
 	[SerializeField]
 	private List<Wave> gameWaves = null;
@@ -21,33 +19,48 @@ public class WaveManagerScript : MonoBehaviour {
 	#region Private Variables.
 
 	private bool waveStarted = false;
+	private int waveNumber = 0;
 
 	private Wave currentWave = null;
 	private bool waveOver = false;
 	private bool spawnCooldown = false;
-
-	private bool gameOver = false;
+	private float spawnRate = 1.0f;
 	#endregion
 
 	#region Private Functions.
 	// Start is called before the first frame update
 	void Start() {
 		//StartNextWave();
+		UIChangeInt change = GameObject.FindGameObjectsWithTag("WaveText")[0].GetComponent<UIChangeInt>();
+		if (change != null)
+		{
+			change.ChangeInt(0);
+		}
 	}
 
 	// Update is called once per frame
 	void Update() {
-		if (waveStarted && currentWave != null) {
+		if (gameWaves != null) {
+			if (gameWaves.Count <= 0 && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && waveOver) {
+				//GAME IS WON, PUT GAME WON CODE HERE
+				Debug.Log("GAME WON!!!");
+				return;
+
+			}
+		}
+		if (waveStarted && currentWave != null && !waveOver) {
 			if (!spawnCooldown) {
 				SpawnEnemy(currentWave.GetNextEnemey());
-				spawnCooldown = true;
-				StartCoroutine(SpawnCooldown());
 			}
 
 			if (currentWave.IsWaveOver()) {
 				//Finish the wave.
+				waveOver = true;
 				currentWave = null;
 				waveStarted = false;
+
+				//Add more souls.
+				gameObject.GetComponent<Currency>().IncreaseSouls(soulsPerRound);
 			}
 		}
 	}
@@ -62,11 +75,14 @@ public class WaveManagerScript : MonoBehaviour {
 		}
 
 		GameObject enemyToSpawn = Instantiate(a_enemy.enemyPrefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
+		spawnCooldown = true;
+		spawnRate = a_enemy.spawnRate;
+		StartCoroutine(SpawnCooldown());
 
 	}
 
 	private IEnumerator SpawnCooldown() {
-		float cooldownTime = Random.Range(spawnRateLowerRange, spawnRateUpperRange);
+		float cooldownTime = spawnRate;
 		yield return new WaitForSeconds(cooldownTime);
 		spawnCooldown = false;
 	}
@@ -81,32 +97,28 @@ public class WaveManagerScript : MonoBehaviour {
 		}
 
 		if (gameWaves.Count <= 0) {
-			gameOver = true;
 			return;
 		}
 
-		if (!waveStarted) {
+		if (!waveStarted)
+		{
+			waveNumber++;
+			UIChangeInt change = GameObject.FindGameObjectsWithTag("WaveText")[0].GetComponent<UIChangeInt>();
+			if (change != null) {
+				change.ChangeInt(waveNumber);
+			}
 			currentWave = gameWaves[0];
 			gameWaves.Remove(currentWave);
 			waveStarted = true;
+			waveOver = false;
 		}
-	}
-
-	/// <summary>
-	/// Returns true if there are no waves left.
-	/// </summary>
-	/// <returns></returns>
-	public bool IsGameOver()
-	{
-		return gameOver;
 	}
 
 	/// <summary>
 	/// Returns true if there's a wave in progress.
 	/// </summary>
 	/// <returns></returns>
-	public bool IsWaveInProgress()
-	{
+	public bool IsWaveInProgress() {
 		return waveStarted;
 	}
 	#endregion

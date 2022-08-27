@@ -13,28 +13,21 @@ public class EntityStatManagerScript : MonoBehaviour {
 	private HealthScript healthScript = null;
 
 	//Modifier utility variables.
-	private static List<Modifier> globalApplyModifiers = null;
-	private static List<Modifier> globalStorageModifier = null;
-	private static Queue<Modifier> globalRemovalList = null;
 	private List<Modifier> applyModifiers = null;
 	private List<Modifier> storageModifier = null;
 	private Queue<Modifier> removalList = null;
 	private int lastModifierCount = 0;
-	private int lastGlobalCount = 0;
+	private float damagerOverTime = 0.0f;
 	#endregion
 
 	#region Private Functions.
 	// Start is called before the first frame update
 	void Start() {
 		//Set up modifier utility variables.
-		globalRemovalList = new Queue<Modifier>();
-		globalApplyModifiers = new List<Modifier>();
-		globalStorageModifier = new List<Modifier>();
 		applyModifiers = new List<Modifier>();
 		storageModifier = new List<Modifier>();
 		removalList = new Queue<Modifier>();
 		lastModifierCount = applyModifiers.Count;
-		lastGlobalCount = globalApplyModifiers.Count;
 
 		//Get entity script references.
 		healthScript = this.gameObject.GetComponent<HealthScript>();
@@ -48,22 +41,14 @@ public class EntityStatManagerScript : MonoBehaviour {
 			}
 		}
 
-		if (globalApplyModifiers != null) {
-			if (globalApplyModifiers.Count != lastGlobalCount) {
-				ApplyGlobalModifiers();
-			}
-		}
-
 		if (removalList != null) {
 			if (removalList.Count > 0) {
 				HandleRemovals();
 			}
 		}
 
-		if (globalRemovalList != null) {
-			if (globalRemovalList.Count > 0) {
-				HandleGlobalRemovals();
-			}
+		if (healthScript != null) {
+			healthScript.DamageEntity(damagerOverTime * Time.deltaTime);
 		}
 	}
 
@@ -86,7 +71,10 @@ public class EntityStatManagerScript : MonoBehaviour {
 					}
 					break;
 				}
-
+			case ModifierType.damageOverTime: {
+					damagerOverTime += a_modifier.value;
+					break;
+				}
 			default: {
 					break;
 				}
@@ -108,18 +96,6 @@ public class EntityStatManagerScript : MonoBehaviour {
 		}
 	}
 
-	private void ApplyGlobalModifiers() {
-		for (int i = 0; i < globalApplyModifiers.Count; i++) {
-			if (globalApplyModifiers[i] == null) {
-				continue;
-			}
-
-			ApplyModifier(globalApplyModifiers[i]);
-			globalStorageModifier.Add(globalApplyModifiers[i]);
-			globalApplyModifiers.Remove(globalApplyModifiers[i]);
-		}
-	}
-
 	private void UnApplyModifier(Modifier a_modifier) {
 		switch (a_modifier.type) {
 			case ModifierType.none: {
@@ -136,7 +112,14 @@ public class EntityStatManagerScript : MonoBehaviour {
 					}
 					break;
 				}
-
+			case ModifierType.damageOverTime: {
+					damagerOverTime -= a_modifier.value;
+					if (damagerOverTime < 0.0f)
+					{
+						damagerOverTime = 0.0f;
+					}
+					break;
+				}
 			default: {
 					break;
 				}
@@ -144,41 +127,23 @@ public class EntityStatManagerScript : MonoBehaviour {
 	}
 
 	private void HandleRemovals() {
-		for (int i = 0; i < removalList.Count; i++)
-		{
+		for (int i = 0; i < removalList.Count; i++) {
 			Modifier removalModifier = removalList.Dequeue();
-			if (removalModifier == null)
-			{
-				continue;
-			}
-
-			UnApplyModifier(removalModifier);
-			
-		}
-	}
-
-	private void HandleGlobalRemovals() {
-		for (int i = 0; i < globalRemovalList.Count; i++) {
-			Modifier removalModifier = globalRemovalList.Dequeue();
 			if (removalModifier == null) {
 				continue;
 			}
 
 			UnApplyModifier(removalModifier);
+
 		}
 	}
-	#endregion
 
-	#region Public Access Functions (Getters and Setters).
-
-	public void AddModifier(Modifier a_modifier) {
-		if (applyModifiers == null) {
-			applyModifiers = new List<Modifier>();
-		}
-		applyModifiers.Add(a_modifier);
+	private IEnumerator RemoveTimer(float time, Modifier a_modifier) {
+		yield return new WaitForSeconds(time);
+		RemoveModifier(a_modifier);
 	}
 
-	public void RemoveModifier(Modifier a_modifier) {
+	private void RemoveModifier(Modifier a_modifier) {
 		if (removalList == null) {
 			removalList = new Queue<Modifier>();
 		}
@@ -199,32 +164,16 @@ public class EntityStatManagerScript : MonoBehaviour {
 		}
 	}
 
-	public static void AddGlobal(Modifier a_modifier) {
-		if (globalApplyModifiers == null) {
-			globalApplyModifiers = new List<Modifier>();
-		}
-		globalApplyModifiers.Add(a_modifier);
-	}
+	#endregion
 
-	public static void RemoveGlobalModifier(Modifier a_modifier) {
-		if (globalRemovalList == null) {
-			globalRemovalList = new Queue<Modifier>();
-		}
-		if (globalStorageModifier == null) {
-			globalStorageModifier = new List<Modifier>();
-		}
-		for (int i = 0; i < globalStorageModifier.Count; i++) {
-			Modifier modifier = globalStorageModifier[i];
-			if (modifier == null) {
-				globalStorageModifier.Remove(globalStorageModifier[i]);
-				continue;
-			}
+	#region Public Access Functions (Getters and Setters).
 
-			if (modifier.ID == a_modifier.ID) {
-				globalRemovalList.Enqueue(globalStorageModifier[i]);
-				globalStorageModifier.Remove(globalStorageModifier[i]);
-			}
+	public void AddModifier(Modifier a_modifier) {
+		if (applyModifiers == null) {
+			applyModifiers = new List<Modifier>();
 		}
+		applyModifiers.Add(a_modifier);
+		StartCoroutine(RemoveTimer(a_modifier.modifierTime, a_modifier));
 	}
 	#endregion
 }
