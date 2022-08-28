@@ -73,7 +73,7 @@ public class EnemyMovement : MonoBehaviour
 
         enemyVelocity = AdjustForWalls(enemyVelocity);
 
-        transform.position = transform.position + ((Vector3)enemyVelocity.normalized * speed * 0.01f);
+        transform.position = transform.position + ((Vector3)enemyVelocity.normalized * speed * Time.deltaTime);
 
         
 
