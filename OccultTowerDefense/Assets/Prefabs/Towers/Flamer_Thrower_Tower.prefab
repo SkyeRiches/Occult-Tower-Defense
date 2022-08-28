@@ -216,7 +216,7 @@ MonoBehaviour:
   placementRadius: 1.5
   attackSpeed: 5
   attackRange: 2
-  cooldownTime: 1
+  cooldownTime: 0.1
   cost: 50
   rangeIndicator: {fileID: 12763739739954020}
 --- !u!114 &7622284828741966752
@@ -232,4 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBaseHealth: 1e+25
+  dustCloudEffect: {fileID: 0}
+  bloodCloudEffect: {fileID: 0}
+  bloodSplatterEffect: {fileID: 0}
   creatureAllignment: 3
