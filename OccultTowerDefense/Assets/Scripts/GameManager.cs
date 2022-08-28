@@ -16,12 +16,12 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void FailGame() {
-		winMessage.SetActive(true);
+		failMessage.SetActive(true);
 		//StartCoroutine(LoadMenu());
 	}
 
 	public void WinGame() {
-		failMessage.SetActive(true);
+		winMessage.SetActive(true);
 		//StartCoroutine(LoadMenu());
 	}
 
