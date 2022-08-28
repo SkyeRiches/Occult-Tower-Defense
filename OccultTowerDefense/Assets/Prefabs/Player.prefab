@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 9067416283735595316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 9067416285138676687}
   m_Father: {fileID: 0}
@@ -196,9 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f10f272ef728344687d3771557625c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBaseHealth: 100
+  maxBaseHealth: 3000
+  dustCloudEffect: {fileID: 8313897021562977748, guid: 68a52e8ffe6bec341b3128210a2e4468, type: 3}
+  bloodCloudEffect: {fileID: 7032357599452562237, guid: d7612d86389082e43bcd3d2ed03b035f, type: 3}
+  bloodSplatterEffect: {fileID: 3614396203364941714, guid: d7fea2444b763b041b3534cffa0d0c50, type: 3}
   creatureAllignment: 0
-  currentHealth: 0
 --- !u!114 &8492224185676541969
 MonoBehaviour:
   m_ObjectHideFlags: 0

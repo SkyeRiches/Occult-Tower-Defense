@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour {
 	private void Awake() {
 		controls = new PlayerControls();
 		controls.Gameplay.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
+		movement.y = -movement.y;
 		controls.Gameplay.Movement.canceled += ctx => movement = Vector2.zero;
 		controls.Gameplay.Aim.performed += ctx => lookDir = ctx.ReadValue<Vector2>();
 		controls.Gameplay.Aim.canceled += ctx => { canFire = false; lookDir = Vector2.zero; };
