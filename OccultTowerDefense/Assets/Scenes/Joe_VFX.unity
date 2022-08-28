@@ -3969,6 +3969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorShadow: {fileID: 1005856863}
   cursor: {fileID: 2135896710}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &1005856863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6646,6 +6647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base
       objectReference: {fileID: 0}
+    - target: {fileID: 17534643620008861, guid: 9a30d201bbe297447959bd0103ac139e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c5a2dc4ed81db7542afdcda4a6546689, type: 3}
     - target: {fileID: 17534643620008862, guid: 9a30d201bbe297447959bd0103ac139e, type: 3}
       propertyPath: m_RootOrder
       value: 2
