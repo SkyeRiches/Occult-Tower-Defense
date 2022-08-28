@@ -201,7 +201,7 @@ public class TowerBehaviour : MonoBehaviour {
 		}
 
 		//Set angle of the transform rotation z to the angle calculated.
-		Vector3 currentAngle = this.transform.rotation.eulerAngles * Mathf.Rad2Deg;
+		Vector3 currentAngle = this.transform.rotation.eulerAngles;
 		currentAngle.z = angle;
 		this.transform.rotation = Quaternion.Euler(currentAngle);
 	}
