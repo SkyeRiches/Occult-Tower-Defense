@@ -9,6 +9,9 @@ public class CursorScript : MonoBehaviour
     private Image cursorShadow;
     [SerializeField]
     private Image cursor;
+
+    [SerializeField]
+    private Vector3 offset;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +21,7 @@ public class CursorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cursorShadow.rectTransform.position = Input.mousePosition + new Vector3(40.0f,-40.0f);
+        cursorShadow.rectTransform.position = Input.mousePosition + offset;
         
         if (Input.GetMouseButtonDown(0))
         {
