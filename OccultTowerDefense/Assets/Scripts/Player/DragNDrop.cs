@@ -49,10 +49,12 @@ public class DragNDrop : MonoBehaviour {
 				if (empowerTower) {
 					objectToDrag.GetComponent<TowerBehaviour>().EmpowerTower();
 				}
-			}
-			else if(objectToDrag != null)
-			{
-				manager.GetComponent<Currency>().DecreaseSouls(50.0f);
+			} else if (objectToDrag != null) {
+				float cost = 5.0f;
+				if (towerPrefab.GetComponent<TowerBehaviour>() != null) {
+					cost = towerPrefab.GetComponent<TowerBehaviour>().GetCost();
+				}
+				manager.GetComponent<Currency>().DecreaseSouls(cost);
 			}
 
 			objectToDrag = null;
@@ -85,7 +87,7 @@ public class DragNDrop : MonoBehaviour {
 	}
 
 	private bool CheckCost() {
-		float cost = 50.0f;
+		float cost = 5.0f;
 		if (towerPrefab.GetComponent<TowerBehaviour>() != null) {
 			cost = towerPrefab.GetComponent<TowerBehaviour>().GetCost();
 		}
@@ -118,10 +120,18 @@ public class DragNDrop : MonoBehaviour {
 			canPlace = true;
 		}
 
-		if (!IsPlacementvalid())
-		{
-			canPlace = false;
+		if (towerPrefab.name == "TrapAttack") {
+			if (IsPlacementvalid()) {
+				canPlace = false;
+			}
+		} else {
+			if (!IsPlacementvalid()) {
+				canPlace = false;
+			}
 		}
+
+
+
 
 		// Check if the tower is being placed on a pool of power
 		if (towerManager.powerPools.Count > 0) {
