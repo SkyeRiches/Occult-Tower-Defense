@@ -35,6 +35,7 @@ public class DragNDrop : MonoBehaviour {
 		objectToDrag.transform.position = GetMousePos();
 	}
 
+
 	private void Update() {
 		if (Input.GetKeyUp(KeyCode.Mouse0) && canPlace && !placedTower) {
 			hasTowerInst = false;
@@ -58,13 +59,29 @@ public class DragNDrop : MonoBehaviour {
 			towerSprite = null;
 		}
 
-		if (Input.GetKey(KeyCode.Mouse0) && objectToDrag && !placedTower) {
+		if (objectToDrag && !placedTower) {
 			objectToDrag.transform.position = GetMousePos();
 		}
 
 		CheckPos();
 
 		ChangeTowerColor();
+	}
+
+
+	private bool IsPlacementvalid() {
+		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+		if (hit.collider == null) {
+			return false;
+		}
+
+		if (hit.collider.gameObject.tag != "Obstacle") {
+			return false;
+		}
+
+		//Only gets here if the placement is valid.
+		return true;
 	}
 
 	private bool CheckCost() {
@@ -99,6 +116,11 @@ public class DragNDrop : MonoBehaviour {
 			}
 		} else {
 			canPlace = true;
+		}
+
+		if (!IsPlacementvalid())
+		{
+			canPlace = false;
 		}
 
 		// Check if the tower is being placed on a pool of power
