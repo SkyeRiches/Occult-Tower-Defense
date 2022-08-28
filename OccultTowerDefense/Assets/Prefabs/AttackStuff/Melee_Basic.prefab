@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6488b211c986b5a4295ccef8ef08040e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 2
   maxEntities: 2147483647
   isHeal: 0
   attackModifiers: []
@@ -184,7 +184,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

@@ -33,14 +33,16 @@ public class AttackScript : MonoBehaviour {
 
 	}
 
-	void Awake()
-	{
-		
+	void Awake() {
+
 	}
 
 	// Update is called once per frame
 	void Update() {
-
+		if (isHeal && attackOwner != null)
+		{
+			gameObject.transform.position = attackOwner.position;
+		}
 	}
 
 	private void OnValidate() {
@@ -92,11 +94,8 @@ public class AttackScript : MonoBehaviour {
 					ApplyModifier(otherStatManager, attackModifiers[i]);
 				}
 			}
-		}
-		else
-		{
-			if (otherHealthScript.GetAllignment() == EntityAllignment.ENEMY)
-			{
+		} else {
+			if (otherHealthScript.GetAllignment() == EntityAllignment.ENEMY) {
 				bool didKill = otherHealthScript.DamageEntity(attackDamage * damageMultiplier);
 			}
 		}

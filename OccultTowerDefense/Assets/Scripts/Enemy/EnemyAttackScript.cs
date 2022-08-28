@@ -48,7 +48,21 @@ public class EnemyAttackScript : MonoBehaviour {
 	void Update() {
 		if (canFire) {
 			UpdateTargetsList();
-			AimAndFire();
+
+			if (attackName == "Melee_Basic" || attackName == "Melee_Boss") {
+				if (targets.Count > 0) {
+					AimAndMelee();
+				}
+			} else if (attackName == "HealBullet") {
+				if (targets.Count > 0) {
+					Vector2 pos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+					FireStationary(pos);
+					canFire = false;
+					StartCoroutine(FireCooldown());
+				}
+			} else {
+				AimAndFire();
+			}
 		}
 	}
 
@@ -90,6 +104,33 @@ public class EnemyAttackScript : MonoBehaviour {
 		}
 	}
 
+	private void AimAndMelee()
+	{
+		//Get target to fire at.
+		GameObject closest = null;
+		for (int i = 0; i < targets.Count; i++) {
+			if (closest == null) {
+				closest = targets[i];
+				continue;
+			}
+
+			if ((targets[i].transform.position - gameObject.transform.position).magnitude < (closest.transform.position - gameObject.transform.position).magnitude) {
+				closest = targets[i];
+			}
+		}
+
+		//Fire at the target if there is one.
+		if (closest == null) {
+			return;
+		}
+
+		canFire = false;
+		Vector2 direction = (new Vector2(closest.transform.position.x, closest.transform.position.y) - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y)).normalized * 1.0f;
+		Vector3 pos = new Vector3(gameObject.transform.position.x + direction.x, gameObject.transform.position.y + direction.y, gameObject.transform.position.z);
+		GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack(attackName, Vector2.zero, pos, this.gameObject.transform, damageMultiplier, 0.25f);
+		StartCoroutine(FireCooldown());
+	}
+
 	private void AimAndFire() {
 		//Get target to fire at.
 		GameObject closest = null;
@@ -110,13 +151,17 @@ public class EnemyAttackScript : MonoBehaviour {
 		}
 
 		canFire = false;
-		Vector2 direction = (new Vector2(closest.transform.position.x, closest.transform.position.y) - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y)).normalized;
+		Vector2 direction = (new Vector2(closest.transform.position.x, closest.transform.position.y) - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y));
 		Fire(direction);
 		StartCoroutine(FireCooldown());
 	}
 
 	private void Fire(Vector2 a_dir) {
 		GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack(attackName, a_dir.normalized * attackSpeed, this.gameObject.transform.position, this.gameObject.transform, damageMultiplier, 5.0f);
+	}
+
+	private void FireStationary(Vector2 a_pos) {
+		GameObject.FindGameObjectsWithTag("Managers")[0].GetComponent<AttacksManagerScript>().SpawnAttack(attackName, Vector2.zero, new Vector3(a_pos.x, a_pos.y, 0.0f), this.gameObject.transform, damageMultiplier, cooldownTime * 0.75f);
 	}
 
 	private IEnumerator FireCooldown() {

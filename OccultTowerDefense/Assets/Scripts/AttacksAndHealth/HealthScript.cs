@@ -61,11 +61,9 @@ public class HealthScript : MonoBehaviour {
 	private void UpdateBaseHealth() {
 		baseHealth = currentHealth / currentHealthMuliplier;
 		baseHealth = Mathf.Clamp(baseHealth, 0, maxBaseHealth);
-		if (gameObject.name == "Base")
-		{
+		if (gameObject.name == "Base") {
 			UIChangeInt change = GameObject.FindGameObjectsWithTag("BaseHealthText")[0].GetComponent<UIChangeInt>();
-			if (change != null)
-			{
+			if (change != null) {
 				change.ChangeInt(Mathf.RoundToInt(currentHealth));
 			}
 		}
@@ -118,8 +116,11 @@ public class HealthScript : MonoBehaviour {
 	/// <returns>Returns true if the entity was killed by the attack. Returns false if the entity was not killed.</returns>
 	public bool DamageEntity(float a_damage) {
 		// Trigger dust cloud effect
-		dustCloudEffectInstance = Instantiate(dustCloudEffect, transform.position, quaternion.identity);
-		Destroy(dustCloudEffectInstance, 2);
+		if (dustCloudEffect != null) {
+			dustCloudEffectInstance = Instantiate(dustCloudEffect, transform.position, quaternion.identity);
+			Destroy(dustCloudEffectInstance, 2);
+		}
+
 		currentHealth -= a_damage;
 		currentHealth = Mathf.Clamp(currentHealth, 0, maxBaseHealth * currentHealthMuliplier);
 		UpdateBaseHealth();
