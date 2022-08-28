@@ -120,14 +120,8 @@ public class DragNDrop : MonoBehaviour {
 			canPlace = true;
 		}
 
-		if (towerPrefab.name == "TrapAttack") {
-			if (IsPlacementvalid()) {
-				canPlace = false;
-			}
-		} else {
-			if (!IsPlacementvalid()) {
-				canPlace = false;
-			}
+		if (!IsPlacementvalid()) {
+			canPlace = false;
 		}
 
 
