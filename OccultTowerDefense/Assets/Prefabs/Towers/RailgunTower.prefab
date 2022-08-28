@@ -149,6 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBaseHealth: 1e+25
+  dustCloudEffect: {fileID: 0}
+  bloodCloudEffect: {fileID: 0}
+  bloodSplatterEffect: {fileID: 0}
   creatureAllignment: 3
 --- !u!1 &5543571470784305549
 GameObject:
@@ -176,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 5543571470784305549}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children: []
   m_Father: {fileID: 3778396485666268409}
   m_RootOrder: 0
