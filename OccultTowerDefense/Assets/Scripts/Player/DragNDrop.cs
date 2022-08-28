@@ -104,7 +104,7 @@ public class DragNDrop : MonoBehaviour {
 			foreach (GameObject go in towerManager.towers) {
 				if (objectToDrag != null && go != null) {
 					float distance = Vector2.Distance(objectToDrag.transform.position, go.transform.position);
-					float placeRad = 1.0f;
+					float placeRad = 0.25f;
 					if (go.GetComponent<TowerBehaviour>() != null) {
 						placeRad = go.GetComponent<TowerBehaviour>().GetPlacementRadius();
 					}
