@@ -181,29 +181,38 @@ public class TowerBehaviour : MonoBehaviour {
 
 	private void LookAtPos(Vector2 a_pos) {
 		//Get vector from tower to target.
-		Vector2 dir = a_pos - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
-		dir.Normalize();
+		//Vector2 dir = a_pos - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+		//dir.Normalize();
 
-		//Convert vector to angle.
-		float angle = 0.0f;
-		if (dir.y > 0.0f) {
-			if (dir.x > 0.0f) {
-				angle = Mathf.Asin(dir.x / 1.0f) * Mathf.Rad2Deg;
-			} else {
-				angle = 360.0f - (Mathf.Asin((0 - dir.x) / 1.0f) * Mathf.Rad2Deg);
-			}
-		} else {
-			if (dir.x > 0.0f) {
-				angle = 90 + (Mathf.Asin((0 - dir.y) / 1.0f) * Mathf.Rad2Deg);
-			} else {
-				angle = 180 + (Mathf.Asin((0 - dir.x) / 1.0f) * Mathf.Rad2Deg);
-			}
-		}
+		////Convert vector to angle.
+		//float angle = 0.0f;
+		//if (dir.y > 0.0f) {
+		//	if (dir.x > 0.0f) {
+		//		angle = Mathf.Asin(dir.x / 1.0f) * Mathf.Rad2Deg;
+		//	} else {
+		//		angle = 360.0f - (Mathf.Asin((0 - dir.x) / 1.0f) * Mathf.Rad2Deg);
+		//	}
+		//} else {
+		//	if (dir.x > 0.0f) {
+		//		angle = 90 + (Mathf.Asin((0 - dir.y) / 1.0f) * Mathf.Rad2Deg);
+		//	} else {
+		//		angle = 180 + (Mathf.Asin((0 - dir.x) / 1.0f) * Mathf.Rad2Deg);
+		//	}
+		//}
 
-		//Set angle of the transform rotation z to the angle calculated.
-		Vector3 currentAngle = this.transform.rotation.eulerAngles;
-		currentAngle.z = angle;
-		this.transform.rotation = Quaternion.Euler(currentAngle);
+		////Set angle of the transform rotation z to the angle calculated.
+		//Vector3 currentAngle = this.transform.rotation.eulerAngles;
+		//currentAngle.z = angle;
+		//this.transform.rotation = Quaternion.Euler(currentAngle * Mathf.Rad2Deg);
+
+		//What is the difference in position?
+		Vector3 diff = ((new Vector3(a_pos.x, a_pos.y, 0.0f)) - transform.position);
+
+		//We use aTan2 since it handles negative numbers and division by zero errors. 
+		float angle = Mathf.Atan2(diff.y, diff.x);
+
+		//Now we set our new rotation. 
+		transform.rotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg - 90.0f);
 	}
 
 	private IEnumerator FireCooldown() {
