@@ -28,7 +28,7 @@ public class SpringDynamics : MonoBehaviour
     [SerializeField]
     private float altSizeMult = 0.0f;
     [SerializeField]
-    private bool changesSize = true;
+    public bool changesSize = true;
     [SerializeField]
     private bool changesRotation = false;
     #endregion
@@ -81,7 +81,7 @@ public class SpringDynamics : MonoBehaviour
         //Rotation
         if (changesRotation)
         {
-            rotateVelocity += (rotTarget - currentRotation.y) * spring * 0.02f;
+            rotateVelocity += (rotTarget - currentRotation.y) * spring * 0.04f;
             rotateVelocity -= rotateVelocity * drag * 2;
             currentRotation += new Vector3(0, rotateVelocity, 0);
             rect.localRotation = Quaternion.Euler(currentRotation);
@@ -129,6 +129,14 @@ public class SpringDynamics : MonoBehaviour
     public void AltPosTeleport()
     {
         rect.anchoredPosition = altPos;
+    }
+
+    /// <summary>
+    /// Changes the UI object's size to its alternate value for use of UI objects changing size after a scene transition
+    /// </summary>
+    public void AltSizeTeleport()
+    {
+        rect.sizeDelta = altSizeTarget;
     }
 
     public void SwitchSize(){
